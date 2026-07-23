@@ -22,9 +22,6 @@
       --serif: 'DM Serif Display', serif;
       --sans: 'DM Sans', sans-serif;
       --radius: 14px;
-      --radius-phone: 44px;
-      --phone-w: clamp(160px, 24vw, 340px);
-      --phone-h: clamp(330px, 49.4vw, 700px);
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -53,10 +50,8 @@
     .btn:hover { border-color: rgba(245,242,238,0.7); }
     .hero-screens { display: flex; justify-content: center; width: 100%; }
 
-    /* PHONE FRAME */
-    .phone-frame { position: relative; width: var(--phone-w); height: var(--phone-h); background: #1E1E1E; border-radius: var(--radius-phone); padding: 11px; box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.35); flex-shrink: 0; }
-    .phone-frame::before { content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 120px; height: 28px; border-radius: 999px; background: #000; z-index: 2; }
-    .phone-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; border: none; border-radius: calc(var(--radius-phone) - 0.5rem); }
+    /* SCREENSHOTS */
+    .hero-screens img, .step-screen img { width: auto; max-width: 300px; height: auto; }
 
     /* RULE */
     .rule { border: none; border-top: 0.5px solid var(--rule); margin: 0 5vw; }
@@ -140,9 +135,7 @@
     <a href="#download" class="btn">Available on Google Play</a>
   </div>
   <div class="hero-screens">
-    <div class="phone-frame">
-      <img src="images/screen-recipes.png" alt="Recipes screen showing what you can cook now">
-    </div>
+    <img src="images/screen-recipes-portrait.png" alt="Recipes screen showing what you can cook now">
   </div>
 </section>
 
@@ -177,9 +170,7 @@
       <p>Pick your cuisines once — Indian, Japanese, Italian, or whatever you actually cook — and Larder pre-fills your pantry with the staples you'd expect to keep. No typing in spices one by one.</p>
     </div>
     <div class="step-screen">
-      <div class="phone-frame">
-        <img id="step-image" src="images/screen-onboarding.png" alt="Onboarding cuisine selection screen">
-      </div>
+      <img id="step-image" src="images/screen-onboarding-portrait.png" alt="Onboarding cuisine selection screen">
     </div>
   </div>
 </section>
@@ -229,31 +220,31 @@
     {
       title: "Tell Larder what you cook.",
       body: "Pick your cuisines once — Indian, Japanese, Italian, or whatever you actually cook — and Larder pre-fills your pantry with the staples you'd expect to keep. No typing in spices one by one.",
-      img: "images/screen-onboarding.png",
+      img: "images/screen-onboarding-portrait.png",
       alt: "Onboarding cuisine selection screen"
     },
     {
       title: "Import your recipes.",
       body: "Paste a URL or type straight from the cookbook on your shelf. Larder strips the life story, restructures the method, and saves it as a proper mise en place — wet prep, dry prep, cook sequence.",
-      img: "images/screen-detail.png",
+      img: "images/screen-detail-portrait.png",
       alt: "Recipe detail showing mise en place structure"
     },
     {
       title: "Set your levels and log the fresh haul.",
       body: "Tap the dots to mark what's full, low, or out. Add this week's market run in the Fresh This Week section. Larder now knows exactly what's in your kitchen.",
-      img: "images/screen-fresh.png",
+      img: "images/screen-fresh-portrait.png",
       alt: "Pantry with dot indicators and Fresh This Week section"
     },
     {
       title: "Export what you need.",
       body: "One tap generates a grouped shopping list — out items, low items, and your fresh haul all combined. Send it to whoever's doing the shop.",
-      img: "images/screen-export.png",
+      img: "images/screen-export-portrait.png",
       alt: "Shopping list export grouped by category"
     },
     {
       title: "See what you can cook tonight.",
       body: "Larder matches your pantry and fresh haul against your recipe vault. Recipes sort themselves: ready now, missing one or two things, or needs a shop. No guesswork.",
-      img: "images/screen-recipes.png",
+      img: "images/screen-recipes-portrait.png",
       alt: "Recipes screen showing can make now, missing 1-2, need more"
     }
   ];
