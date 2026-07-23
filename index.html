@@ -42,7 +42,7 @@
     .nav-legal-menu a:hover { color: var(--text); background: rgba(245,242,238,0.06); }
 
     /* HERO */
-    .hero { padding: 2.5rem clamp(1rem, 5vw, 60px) 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; }
+    .hero { padding: 2rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; }
     .hero-copy h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.06; font-weight: 400; margin-bottom: 1.4rem; }
     .hero-copy p { font-size: 1rem; line-height: 1.8; color: var(--muted); max-width: 44ch; margin-bottom: 2.2rem; }
     .eyebrow { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
@@ -57,11 +57,11 @@
     .rule { border: none; border-top: 0.5px solid var(--rule); margin: 0 5vw; }
 
     /* STEPS */
-    .steps-section { padding: 6rem 5vw; }
+    .steps-section { padding: 6rem 5vw; max-width: 1200px; margin: 0 auto; }
     .steps-section .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
     .steps-section h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; margin-bottom: 3rem; line-height: 1.15; }
 
-    .steps-layout { display: grid; grid-template-columns: minmax(150px, 200px) minmax(280px, 1fr) max-content; gap: 3rem; align-items: start; }
+    .steps-layout { display: grid; grid-template-columns: minmax(150px, 200px) minmax(280px, 440px) max-content; gap: 3rem; align-items: start; }
 
     .steps-sidebar { display: flex; flex-direction: column; gap: 0.2rem; border-right: 0.5px solid var(--rule); }
     .step-nav-item { padding: 0.9rem 1.2rem 0.9rem 1rem; cursor: pointer; border-left: 2px solid transparent; color: var(--dim); transition: color 0.2s, border-color 0.2s, background 0.2s; user-select: none; }
