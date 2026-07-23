@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Larder: Mise & Go — Your recipes, matched to your kitchen</title>
-  <meta name="description" content="Larder: Mise & Go matches your own curated recipes against what's actually in your kitchen. One-time purchase, no subscription.">
+  <title>Larder · Mise en Go — Your recipes, matched to your kitchen</title>
+  <meta name="description" content="Larder · Mise en Go matches your own curated recipes against what's actually in your kitchen. One-time purchase, no subscription.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -21,6 +21,8 @@
       --sage: #8FA67A;
       --serif: 'DM Serif Display', serif;
       --sans: 'DM Sans', sans-serif;
+      --radius: 14px;
+      --radius-phone: 2.1rem;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -31,6 +33,14 @@
     .logo-sub { color: var(--dim); }
     .nav-cta { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 0.5px solid rgba(245,242,238,0.25); padding: 0.55rem 1.2rem; transition: color 0.2s, border-color 0.2s; }
     .nav-cta:hover { color: var(--text); border-color: rgba(245,242,238,0.5); }
+    .nav-right { display: flex; align-items: center; gap: 1.8rem; }
+    .nav-legal { position: relative; }
+    .nav-legal-trigger { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); cursor: default; user-select: none; }
+    .nav-legal:hover .nav-legal-trigger { color: var(--muted); }
+    .nav-legal-menu { position: absolute; top: 100%; right: 0; margin-top: 0.9rem; background: var(--bg2); border: 0.5px solid var(--rule); border-radius: var(--radius); padding: 0.4rem; min-width: 150px; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.15s, transform 0.15s, visibility 0.15s; }
+    .nav-legal:hover .nav-legal-menu, .nav-legal:focus-within .nav-legal-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-legal-menu a { display: block; font-size: 0.68rem; letter-spacing: 0.06em; color: var(--dim); text-decoration: none; padding: 0.55rem 0.7rem; border-radius: calc(var(--radius) - 8px); transition: color 0.2s, background 0.2s; }
+    .nav-legal-menu a:hover { color: var(--text); background: rgba(245,242,238,0.06); }
 
     /* HERO */
     .hero { padding: 6rem 5vw 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; }
@@ -40,8 +50,13 @@
     .btn { display: inline-block; border: 0.5px solid rgba(245,242,238,0.4); color: var(--text); font-family: var(--sans); font-size: 0.78rem; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; transition: border-color 0.2s; }
     .btn:hover { border-color: rgba(245,242,238,0.7); }
     .hero-screens { display: flex; gap: 1rem; align-items: flex-start; justify-content: center; }
-    .hero-screens img { width: 46%; border: 0.5px solid var(--faint); display: block; }
-    .hero-screens img:last-child { margin-top: 3rem; }
+    .hero-screens .phone-frame { width: 46%; }
+    .hero-screens .phone-frame:last-child { margin-top: 3rem; }
+
+    /* PHONE FRAME */
+    .phone-frame { position: relative; background: var(--bg2); border: 1px solid var(--faint); border-radius: var(--radius-phone); padding: 0.55rem 0.4rem; box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.35); }
+    .phone-frame::before { content: ''; position: absolute; top: 0.85rem; left: 50%; transform: translateX(-50%); width: 28%; height: 5px; border-radius: 999px; background: var(--faint); z-index: 2; }
+    .phone-frame img { width: 100%; display: block; border: none; border-radius: calc(var(--radius-phone) - 0.5rem); }
 
     /* RULE */
     .rule { border: none; border-top: 0.5px solid var(--rule); margin: 0 5vw; }
@@ -61,15 +76,18 @@
     .step-content h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.2; }
     .step-content p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); max-width: 42ch; }
     .step-screen { display: flex; justify-content: center; }
-    .step-screen img { width: 100%; max-width: 280px; border: 0.5px solid var(--faint); display: block; transition: opacity 0.3s ease; }
+    .step-screen .phone-frame { width: 100%; max-width: 280px; }
+    .step-screen img { transition: opacity 0.3s ease; }
 
     /* PRICING */
     .pricing { padding: 6rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1200px; }
     .pricing-copy .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
     .pricing-copy h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; margin-bottom: 1rem; line-height: 1.15; }
     .pricing-copy p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); max-width: 44ch; }
-    .pricing-card { border: 0.5px solid rgba(245,242,238,0.15); padding: 2.5rem; }
-    .price-amount { font-family: var(--serif); font-size: 3rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .pricing-card { border: 0.5px solid rgba(245,242,238,0.15); border-radius: var(--radius); padding: 2.5rem; }
+    .price-amount { font-family: var(--serif); font-size: 3rem; font-weight: 400; margin-bottom: 0.3rem; display: flex; align-items: baseline; gap: 0.7rem; }
+    .price-was { font-family: var(--sans); font-size: 1.1rem; color: var(--dim); text-decoration: line-through; }
+    .price-founding { font-size: 0.78rem; color: var(--sage); margin-bottom: 0.6rem; }
     .price-note { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 2rem; }
     .price-features { list-style: none; margin-bottom: 2rem; }
     .price-features li { font-size: 0.88rem; color: var(--muted); padding: 0.6rem 0; border-bottom: 0.5px solid var(--rule); line-height: 1.5; }
@@ -89,7 +107,7 @@
       .hero-screens { max-width: 340px; margin: 0 auto; }
       .steps-panel { grid-template-columns: 1fr; gap: 2.5rem; }
       .step-screen { order: -1; }
-      .step-screen img { max-width: 220px; }
+      .step-screen .phone-frame { max-width: 220px; }
       .pricing { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 5vw; }
       .steps-tabs { gap: 0; }
       .step-tab { min-width: 90px; font-size: 0.7rem; padding: 0.8rem 0.3rem; }
@@ -102,8 +120,17 @@
 <body>
 
 <nav>
-  <a href="/" class="logo">Larder<span class="logo-sub">: Mise &amp; Go</span></a>
-  <a href="#download" class="nav-cta">Get the app</a>
+  <a href="/" class="logo">Larder<span class="logo-sub"> &middot; Mise en Go</span></a>
+  <div class="nav-right">
+    <div class="nav-legal" tabindex="0">
+      <span class="nav-legal-trigger">Legal</span>
+      <div class="nav-legal-menu">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+    <a href="#download" class="nav-cta">Get the app</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -115,8 +142,12 @@
     <a href="#download" class="btn">Available on Google Play</a>
   </div>
   <div class="hero-screens">
-    <img src="images/screen-recipes.png" alt="Recipes screen showing what you can cook now">
-    <img src="images/screen-detail.png" alt="Recipe detail with mise en place layout">
+    <div class="phone-frame">
+      <img src="images/screen-recipes.png" alt="Recipes screen showing what you can cook now">
+    </div>
+    <div class="phone-frame">
+      <img src="images/screen-detail.png" alt="Recipe detail with mise en place layout">
+    </div>
   </div>
 </section>
 
@@ -151,7 +182,9 @@
       <p>Pick your cuisines once — Indian, Japanese, Italian, or whatever you actually cook — and Larder pre-fills your pantry with the staples you'd expect to keep. No typing in spices one by one.</p>
     </div>
     <div class="step-screen">
-      <img id="step-image" src="images/screen-onboarding.png" alt="Onboarding cuisine selection screen">
+      <div class="phone-frame">
+        <img id="step-image" src="images/screen-onboarding.png" alt="Onboarding cuisine selection screen">
+      </div>
     </div>
   </div>
 </section>
@@ -166,7 +199,8 @@
     <p>Your recipes and pantry stay on your device. Optional backup to your own Google Drive. Nothing is sent anywhere except the recipe text when you import — and that's just to restructure it into mise en place.</p>
   </div>
   <div class="pricing-card">
-    <div class="price-amount">$49.99</div>
+    <div class="price-amount">$24.99 <span class="price-was">$49.99</span></div>
+    <div class="price-founding">100 founding user spots &mdash; then $49.99</div>
     <div class="price-note">One-time purchase &middot; No subscription</div>
     <ul class="price-features">
       <li>100 AI recipe imports, included</li>
@@ -184,7 +218,7 @@
 
 <footer>
   <div>
-    <div class="footer-brand">Larder: Mise &amp; Go</div>
+    <div class="footer-brand">Larder &middot; Mise en Go</div>
     <div class="footer-copy">&copy; 2026 Nuttig &middot; misego.app &middot; Den Haag, Netherlands &middot; KVK: &mdash;</div>
   </div>
   <div class="footer-links">
