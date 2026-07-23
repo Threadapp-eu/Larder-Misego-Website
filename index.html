@@ -42,7 +42,7 @@
     .nav-legal-menu a:hover { color: var(--text); background: rgba(245,242,238,0.06); }
 
     /* HERO */
-    .hero { padding: 5rem clamp(1rem, 5vw, 60px) 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; min-height: min(85vh, 860px); }
+    .hero { padding: 2.5rem clamp(1rem, 5vw, 60px) 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; }
     .hero-copy h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.06; font-weight: 400; margin-bottom: 1.4rem; }
     .hero-copy p { font-size: 1rem; line-height: 1.8; color: var(--muted); max-width: 44ch; margin-bottom: 2.2rem; }
     .eyebrow { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
@@ -61,13 +61,16 @@
     .steps-section .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
     .steps-section h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; margin-bottom: 3rem; line-height: 1.15; }
 
-    .steps-tabs { display: flex; gap: 0; margin-bottom: 0; border-bottom: 0.5px solid var(--rule); overflow-x: auto; }
-    .step-tab { flex: 1; min-width: 120px; padding: 1rem 0.5rem 1rem; text-align: center; cursor: pointer; border-bottom: 2px solid transparent; transition: border-color 0.2s, color 0.2s; color: var(--dim); font-size: 0.78rem; letter-spacing: 0.06em; user-select: none; white-space: nowrap; }
-    .step-tab:hover { color: var(--muted); }
-    .step-tab.active { border-bottom-color: var(--sage); color: var(--text); }
-    .step-num { font-family: var(--serif); font-size: 0.65rem; color: var(--sage); display: block; margin-bottom: 4px; }
+    .steps-layout { display: grid; grid-template-columns: minmax(150px, 200px) minmax(280px, 1fr) max-content; gap: 3rem; align-items: start; }
 
-    .steps-panel { display: grid; grid-template-columns: minmax(280px, 420px) max-content; gap: 1.5rem; align-items: start; padding: 2.5rem 0 0; }
+    .steps-sidebar { display: flex; flex-direction: column; gap: 0.2rem; border-right: 0.5px solid var(--rule); }
+    .step-nav-item { padding: 0.9rem 1.2rem 0.9rem 1rem; cursor: pointer; border-left: 2px solid transparent; color: var(--dim); transition: color 0.2s, border-color 0.2s, background 0.2s; user-select: none; }
+    .step-nav-item:hover { color: var(--muted); }
+    .step-nav-item.active { border-left-color: var(--sage); color: var(--text); background: rgba(245,242,238,0.03); }
+    .step-num { font-family: var(--serif); font-size: 0.65rem; color: var(--sage); display: block; margin-bottom: 4px; }
+    .step-label { font-size: 0.85rem; letter-spacing: 0.02em; }
+
+    .step-content { padding-top: 0.3rem; }
     .step-content h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.2; }
     .step-content p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); max-width: 42ch; }
     .step-screen { display: flex; justify-content: flex-start; }
@@ -97,16 +100,17 @@
 
     /* RESPONSIVE */
     @media (max-width: 820px) {
-      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 5vw; min-height: auto; }
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 5vw; }
       .hero-screens { margin: 0 auto; }
-      .steps-panel { grid-template-columns: 1fr; gap: 2rem; }
-      .step-screen { order: -1; }
+      .steps-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .steps-sidebar { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 0.5px solid var(--rule); gap: 0.5rem; }
+      .step-nav-item { border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+      .step-nav-item.active { border-bottom-color: var(--sage); background: none; }
+      .step-screen { order: -1; justify-content: center; }
       .pricing { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 5vw; }
-      .steps-tabs { gap: 0; }
-      .step-tab { min-width: 90px; font-size: 0.7rem; padding: 0.8rem 0.3rem; }
     }
     @media (max-width: 500px) {
-      .step-tab { min-width: 70px; font-size: 0.62rem; }
+      .step-nav-item { font-size: 0.7rem; padding: 0.7rem 0.7rem; }
     }
   </style>
 </head>
@@ -146,25 +150,25 @@
   <span class="section-eyebrow">How it works</span>
   <h2>From empty shelves<br>to dinner, in five steps.</h2>
 
-  <div class="steps-tabs" role="tablist">
-    <div class="step-tab active" role="tab" data-step="0" tabindex="0">
-      <span class="step-num">01</span>Pick cuisines
+  <div class="steps-layout">
+    <div class="steps-sidebar" role="tablist">
+      <div class="step-nav-item active" role="tab" data-step="0" tabindex="0">
+        <span class="step-num">01</span><span class="step-label">Pick cuisines</span>
+      </div>
+      <div class="step-nav-item" role="tab" data-step="1" tabindex="0">
+        <span class="step-num">02</span><span class="step-label">Build your vault</span>
+      </div>
+      <div class="step-nav-item" role="tab" data-step="2" tabindex="0">
+        <span class="step-num">03</span><span class="step-label">Set levels &amp; fresh haul</span>
+      </div>
+      <div class="step-nav-item" role="tab" data-step="3" tabindex="0">
+        <span class="step-num">04</span><span class="step-label">Export</span>
+      </div>
+      <div class="step-nav-item" role="tab" data-step="4" tabindex="0">
+        <span class="step-num">05</span><span class="step-label">Cook</span>
+      </div>
     </div>
-    <div class="step-tab" role="tab" data-step="1" tabindex="0">
-      <span class="step-num">02</span>Build your vault
-    </div>
-    <div class="step-tab" role="tab" data-step="2" tabindex="0">
-      <span class="step-num">03</span>Set levels &amp; fresh haul
-    </div>
-    <div class="step-tab" role="tab" data-step="3" tabindex="0">
-      <span class="step-num">04</span>Export
-    </div>
-    <div class="step-tab" role="tab" data-step="4" tabindex="0">
-      <span class="step-num">05</span>Cook
-    </div>
-  </div>
 
-  <div class="steps-panel">
     <div class="step-content" id="step-content">
       <h3>Tell Larder what you cook.</h3>
       <p>Pick your cuisines once — Indian, Japanese, Italian, or whatever you actually cook — and Larder pre-fills your pantry with the staples you'd expect to keep. No typing in spices one by one.</p>
@@ -249,7 +253,7 @@
     }
   ];
 
-  const tabs = document.querySelectorAll('.step-tab');
+  const tabs = document.querySelectorAll('.step-nav-item');
   const content = document.getElementById('step-content');
   const image = document.getElementById('step-image');
 
