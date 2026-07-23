@@ -29,17 +29,17 @@
 
     /* NAV */
     nav { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 5vw; border-bottom: 0.5px solid var(--rule); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-    .logo { font-family: var(--serif); font-size: 1rem; color: var(--text); text-decoration: none; letter-spacing: 0.02em; }
+    .logo { font-family: var(--serif); font-size: 1.4rem; color: var(--text); text-decoration: none; letter-spacing: 0.02em; -webkit-text-stroke: 0.4px currentColor; }
     .logo-sub { color: var(--dim); }
     .nav-cta { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 0.5px solid rgba(245,242,238,0.25); padding: 0.55rem 1.2rem; transition: color 0.2s, border-color 0.2s; }
     .nav-cta:hover { color: var(--text); border-color: rgba(245,242,238,0.5); }
     .nav-right { display: flex; align-items: center; gap: 1.8rem; }
     .nav-legal { position: relative; }
-    .nav-legal-trigger { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); cursor: default; user-select: none; }
+    .nav-legal-trigger { font-family: var(--serif); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); cursor: default; user-select: none; }
     .nav-legal:hover .nav-legal-trigger { color: var(--muted); }
     .nav-legal-menu { position: absolute; top: 100%; right: 0; margin-top: 0.9rem; background: var(--bg2); border: 0.5px solid var(--rule); border-radius: var(--radius); padding: 0.4rem; min-width: 150px; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.15s, transform 0.15s, visibility 0.15s; }
     .nav-legal:hover .nav-legal-menu, .nav-legal:focus-within .nav-legal-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-    .nav-legal-menu a { display: block; font-size: 0.68rem; letter-spacing: 0.06em; color: var(--dim); text-decoration: none; padding: 0.55rem 0.7rem; border-radius: calc(var(--radius) - 8px); transition: color 0.2s, background 0.2s; }
+    .nav-legal-menu a { display: block; font-family: var(--serif); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--dim); text-decoration: none; padding: 0.55rem 0.7rem; border-radius: calc(var(--radius) - 8px); transition: color 0.2s, background 0.2s; }
     .nav-legal-menu a:hover { color: var(--text); background: rgba(245,242,238,0.06); }
 
     /* HERO */
