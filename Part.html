@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Part</title>
+<meta name="description" content="Vertrek · Den Haag transit board">
+<meta name="theme-color" content="#0f0f0e">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Part">
+<link rel="manifest" href="/part/manifest.json">
+<style>
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  :root {
+    --bg:       #0f0f0e;
+    --surface:  #181816;
+    --border:   #2a2a27;
+    --text:     #e8e6df;
+    --muted:    #6b6960;
+    --amber:    #c8963c;
+    --amber-lo: #7a5a20;
+    --rain-0:   #1a2a1a;
+    --rain-1:   #2a4a2a;
+    --rain-2:   #3a6a3a;
+    --rain-3:   #8ab44a;
+    --rain-4:   #c8963c;
+    --rain-5:   #c85c2a;
+    --red:      #c85c3a;
+    --green:    #5a8a5a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────── */
+  #header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  #clock {
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: var(--text);
+    line-height: 1;
+  }
+  #date-line {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: right;
+  }
+
+  /* ── SECTION LABELS ─────────────────────────────────────── */
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* ── RAIN ───────────────────────────────────────────────── */
+  #rain-section { }
+
+  #rain-bar-wrap {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 48px;
+    margin-bottom: 6px;
+  }
+
+  .rain-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+  }
+
+  .rain-fill {
+    width: 100%;
+    min-height: 2px;
+    transition: height 0.4s ease;
+  }
+
+  #rain-labels {
+    display: flex;
+    justify-content: space-between;
+  }
+  #rain-labels span {
+    font-size: 9px;
+    color: var(--muted);
+  }
+
+  #rain-status {
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 4px;
+  }
+
+  /* ── TRAM GRID ──────────────────────────────────────────── */
+  #tram-section {
+    flex: 1;
+  }
+
+  .stop-block {
+    margin-bottom: 14px;
+  }
+
+  .stop-name {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .departures {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .departure-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .line-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 18px;
+    font-size: 11px;
+    font-weight: bold;
+    background: var(--border);
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  .line-badge.htm-2  { background: #2a4a7a; }
+  .line-badge.htm-3  { background: #7a2a5a; }
+  .line-badge.htm-4  { background: #c87a2a; }
+  .line-badge.htm-11 { background: #4a3a7a; }
+  .line-badge.htm-12 { background: #2a6a4a; }
+
+  .dep-icon {
+    font-size: 13px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .dep-dest {
+    flex: 1;
+    color: var(--muted);
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dep-time {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text);
+    text-align: right;
+    min-width: 44px;
+  }
+
+  .departure-row.catchable .dep-time { color: var(--amber); }
+  .departure-row.catchable .dep-min  { color: var(--amber); }
+  .departure-row.missed .dep-time    { color: var(--red); }
+
+  .dep-min {
+    font-size: 10px;
+    color: var(--muted);
+    min-width: 28px;
+    text-align: right;
+  }
+
+  .source-tag {
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 1px 4px;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .source-tag.sched { color: var(--amber); border: 1px solid var(--amber-lo); }
+  .source-tag.mock  { color: var(--border); border: 1px solid var(--border); }
+
+  /* ── DIVIDER ─────────────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2px 0 14px 0;
+  }
+
+  /* ── NS TRAINS ──────────────────────────────────────────── */
+  #ns-section { }
+
+  .ns-direction {
+    margin-bottom: 12px;
+  }
+
+  .ns-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+
+  .ns-from {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .ns-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 3px;
+  }
+
+  .ns-time {
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 52px;
+  }
+
+  .ns-delay {
+    font-size: 10px;
+    color: var(--red);
+    min-width: 28px;
+  }
+
+  .ns-dest {
+    flex: 1;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .ns-track {
+    font-size: 10px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    min-width: 22px;
+    text-align: center;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────────── */
+  #footer {
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  /* ── ERROR STATE ─────────────────────────────────────────── */
+  .error { color: var(--muted); font-style: italic; font-size: 11px; }
+
+  /* ── LOADING ─────────────────────────────────────────────── */
+  .loading { color: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="clock">00:00</div>
+  <div id="date-line">
+    <div id="day-name"></div>
+    <div id="date-str"></div>
+  </div>
+</div>
+
+<!-- RAIN -->
+<div id="rain-section">
+  <div class="section-label">Regen · 2 uur</div>
+  <div id="rain-bar-wrap"></div>
+  <div id="rain-labels">
+    <span>nu</span>
+    <span>30m</span>
+    <span>1u</span>
+    <span>1u30</span>
+    <span>2u</span>
+  </div>
+  <div id="rain-status" class="loading">laden…</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TRAM -->
+<div id="tram-section">
+  <div class="section-label">Tram · Haltes</div>
+  <div id="tram-stops"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- NS -->
+<div id="ns-section">
+  <div class="section-label">Trein · NS</div>
+  <div id="ns-trains"></div>
+</div>
+
+<!-- FOOTER -->
+<div id="footer">
+  <span id="last-update">—</span>
+  <span>DEN HAAG</span>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// CONFIGURATION — edit these values
+// ══════════════════════════════════════════════════════════════
+
+const CONFIG = {
+  // Your home lat/lon for Buienradar (Weimarstraat area)
+  lat: 52.077,
+  lon: 4.284,
+
+  // OVAPI Timing Point Codes for your 4 tram stops.
+  // To find codes: open https://v0.ovapi.nl/stopareacode/ in browser,
+  // then try e.g. v0.ovapi.nl/stopareacode/hmweimarstraat_beeklaan/
+  // Or use OV Zoeker (https://www.ovzoeker.nl) and note the "haltenummer"
+  // then call v0.ovapi.nl/tpc/{code}
+  //
+  // IF you have a CORS proxy (see README below), set:
+  //   proxyBase: 'https://your-worker.workers.dev'
+  // and the tram/NS calls route through it.
+  //
+  proxyBase: '/part/proxy', // Railway backend — change if domain changes
+
+  tramStops: [
+    {
+      name: 'Weimarstraat (Beeklaan)',
+      tpc: 'TODO_BEEKLAAN_CODE',
+      showLines: ['12'],
+      walkMins: 6,
+      htmSlug: 'weimarstraat',
+    },
+    {
+      name: 'Weimarstraat (Conradkade)',
+      tpc: 'TODO_CONRADKADE_CODE',
+      showLines: ['11'],
+      walkMins: 12,
+      htmSlug: 'weimarstraat',
+    },
+    {
+      name: 'De la Reyweg',
+      tpc: 'TODO_DELAREYWEG_CODE',
+      showLines: ['2', '4', '456'],
+      walkMins: 12,
+      htmSlug: 'de-la-reyweg',
+    },
+    {
+      name: 'Elandstraat',
+      tpc: 'TODO_ELANDSTRAAT_CODE',
+      showLines: ['3'],
+      walkMins: 8,
+      htmSlug: 'elandstraat',
+    },
+  ],
+
+  // NS API key — get free at https://apiportal.ns.nl
+  nsApiKey: 'TODO_NS_API_KEY',
+
+  // NS station codes
+  nsStations: [
+    { code: 'GVC', label: 'Den Haag Centraal', dir: 'uit', dest: 'Amsterdam' },
+    { code: 'HDE', label: 'Den Haag HS',        dir: 'uit', dest: 'Amsterdam' },
+    { code: 'ASD', label: 'Amsterdam Centraal', dir: 'thuis', dest: 'Den Haag' },
+  ],
+};
+
+// ══════════════════════════════════════════════════════════════
+// MOCK DATA — used when proxyBase is null / keys are TODO
+// ══════════════════════════════════════════════════════════════
+
+const MOCK_TRAM = {
+  'TODO_BEEKLAAN_CODE': [
+    { line: '12', dest: 'Station HS',  mins: 3  },
+    { line: '12', dest: 'Duindorp',    mins: 6  },
+    { line: '12', dest: 'Station HS',  mins: 13 },
+    { line: '12', dest: 'Duindorp',    mins: 16 },
+  ],
+  'TODO_CONRADKADE_CODE': [
+    { line: '11', dest: 'Scheveningen Haven', mins: 2  },
+    { line: '11', dest: 'Station HS',         mins: 5  },
+    { line: '11', dest: 'Scheveningen Haven', mins: 12 },
+    { line: '11', dest: 'Station HS',         mins: 15 },
+  ],
+  'TODO_DELAREYWEG_CODE': [
+    { line: '2',   dest: 'Leidschendam',      mins: 1  },
+    { line: '4',   dest: 'LansingerlndZ\'meer', mins: 2  },
+    { line: '2',   dest: 'DH Kraayenstein',    mins: 6  },
+    { line: '4',   dest: 'DH De Uithof',       mins: 6  },
+    { line: '2',   dest: 'Leidschendam',       mins: 11 },
+    { line: '4',   dest: 'LansingerlndZ\'meer', mins: 12 },
+  ],
+  'TODO_ELANDSTRAAT_CODE': [
+    { line: '3', dest: 'Leidschendam', mins: 4  },
+    { line: '3', dest: 'Loosduinen',   mins: 8  },
+    { line: '3', dest: 'Leidschendam', mins: 14 },
+    { line: '3', dest: 'Loosduinen',   mins: 18 },
+  ],
+};
+
+// ══════════════════════════════════════════════════════════════
+// DIRECTION ICONS
+// Destinations that mean "heading home" (residential / beach end).
+// Everything else is assumed outbound → 🏬
+// ══════════════════════════════════════════════════════════════
+
+const HOME_DESTINATIONS = [
+  'duindorp', 'loosduinen', 'scheveningen', 'kraayenstein', 'kraayensteinlaan',
+  'leidschendam', 'wateringen', 'vrederust', 'zoetermeer',
+  'bouwlustlaan', 'beresteijnlaan', 'de rade',
+];
+
+function dirIcon(dest) {
+  const d = dest.toLowerCase();
+  return HOME_DESTINATIONS.some(h => d.includes(h)) ? '🏠' : '🏬';
+}
+
+const MOCK_NS = {
+  GVC: [
+    { time: '14:22', delay: 0,  dest: 'Amsterdam Centraal', track: '8' },
+    { time: '14:37', delay: 0,  dest: 'Amsterdam Centraal', track: '9' },
+    { time: '14:52', delay: 3,  dest: 'Amsterdam Centraal', track: '8' },
+  ],
+  HDE: [
+    { time: '14:18', delay: 0,  dest: 'Amsterdam Centraal', track: '3a' },
+    { time: '14:48', delay: 0,  dest: 'Amsterdam Centraal', track: '3b' },
+  ],
+  ASD: [
+    { time: '14:15', delay: 0,  dest: 'Den Haag Centraal', track: '7' },
+    { time: '14:30', delay: 5,  dest: 'Den Haag HS',       track: '6' },
+    { time: '14:45', delay: 0,  dest: 'Den Haag Centraal', track: '7' },
+  ],
+};
+
+// ══════════════════════════════════════════════════════════════
+// CLOCK
+// ══════════════════════════════════════════════════════════════
+
+function updateClock() {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, '0');
+  const mm = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('clock').textContent = `${hh}:${mm}`;
+
+  const days = ['Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag'];
+  const months = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  document.getElementById('day-name').textContent = days[now.getDay()];
+  document.getElementById('date-str').textContent =
+    `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// RAIN (Buienradar — direct, no proxy needed)
+// ══════════════════════════════════════════════════════════════
+
+// Mock rain: a realistic shower arriving around slot 4–8, then clearing.
+// Values 0–255 (Buienradar scale). Replace with real data once live.
+const MOCK_RAIN = [
+   0,  0,  0,  4, 18, 62, 110, 145, 130, 90, 55, 30, 12,  4,  0,  0,
+   0,  0,  0,  0,  0,  0,   0,   5
+];
+
+function renderRainSlots(slots) {
+  const wrap = document.getElementById('rain-bar-wrap');
+  wrap.innerHTML = '';
+
+  let anyRain = false;
+  let firstRainIdx = -1;
+
+  slots.forEach((s, i) => {
+    if (s.val > 5) { anyRain = true; if (firstRainIdx < 0) firstRainIdx = i; }
+
+    const col = document.createElement('div');
+    col.className = 'rain-col';
+
+    const fill = document.createElement('div');
+    fill.className = 'rain-fill';
+    const pct = Math.max(2, (s.val / 255) * 100);
+    fill.style.height = `${pct}%`;
+
+    if (s.val < 10)       fill.style.background = '#1e2a1e';
+    else if (s.val < 40)  fill.style.background = '#2a4a2a';
+    else if (s.val < 80)  fill.style.background = '#3a6a3a';
+    else if (s.val < 130) fill.style.background = '#8ab44a';
+    else if (s.val < 180) fill.style.background = '#c8963c';
+    else                  fill.style.background = '#c85c2a';
+
+    col.appendChild(fill);
+    wrap.appendChild(col);
+  });
+
+  const statusEl = document.getElementById('rain-status');
+  if (!anyRain) {
+    statusEl.style.color = '#5a8a5a';
+    statusEl.textContent = 'Droog de komende 2 uur';
+  } else {
+    const firstTime = slots[firstRainIdx]?.time || '';
+    const label = firstRainIdx === 0 ? 'Regen nu' : `Regen vanaf ${firstTime}`;
+    statusEl.style.color = '#c8963c';
+    statusEl.textContent = label;
+  }
+}
+
+async function loadRain() {
+  try {
+    const url = `https://gpsgadget.buienradar.nl/data/raintext?lat=${CONFIG.lat}&lon=${CONFIG.lon}`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('http ' + r.status);
+    const text = await r.text();
+    const slots = text.trim().split('\n').map(l => {
+      const [val, time] = l.split('|');
+      return { val: parseInt(val, 10), time: (time || '').trim() };
+    }).filter(s => !isNaN(s.val));
+    if (slots.length === 0) throw new Error('empty');
+    renderRainSlots(slots);
+  } catch (e) {
+    // Fallback: show mock rain so the chart is never blank
+    const now = new Date();
+    const mockSlots = MOCK_RAIN.map((val, i) => {
+      const t = new Date(now.getTime() + i * 5 * 60000);
+      return { val, time: `${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}` };
+    });
+    renderRainSlots(mockSlots);
+    document.getElementById('rain-status').title = 'Buienradar niet bereikbaar — voorbeelddata';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// TRAM (OVAPI via proxy, or mock)
+// ══════════════════════════════════════════════════════════════
+
+function renderTram(departures, stopName, walkMins, source) {
+  const block = document.createElement('div');
+  block.className = 'stop-block';
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'stop-name';
+
+  const sourceTag = source === 'schedule' ? ' <span class="source-tag sched">dienstregeling</span>'
+                  : source === 'mock'     ? ' <span class="source-tag mock">voorbeeld</span>'
+                  : '';
+  nameEl.innerHTML = stopName + sourceTag;
+  block.appendChild(nameEl);
+
+  const depsEl = document.createElement('div');
+  depsEl.className = 'departures';
+
+  if (!departures || departures.length === 0) {
+    depsEl.innerHTML = '<span class="error">geen vertrektijden</span>';
+  } else {
+    departures.slice(0, 4).forEach(d => {
+      const row = document.createElement('div');
+      const catchable = d.mins >= walkMins;
+      row.className = `departure-row${catchable ? ' catchable' : ' missed'}`;
+
+      const badge = document.createElement('span');
+      badge.className = `line-badge htm-${d.line}`;
+      badge.textContent = d.line;
+
+      const iconEl = document.createElement('span');
+      iconEl.className = 'dep-icon';
+      iconEl.textContent = dirIcon(d.dest);
+
+      const dest = document.createElement('span');
+      dest.className = 'dep-dest';
+      dest.textContent = d.dest;
+
+      const timeEl = document.createElement('span');
+      timeEl.className = 'dep-time';
+      timeEl.textContent = d.mins <= 0 ? '⟶' : formatMinsAsTime(d.mins);
+
+      const minEl = document.createElement('span');
+      minEl.className = 'dep-min';
+      minEl.textContent = d.mins <= 1 ? 'NU' : `${d.mins}m`;
+
+      row.appendChild(badge);
+      row.appendChild(iconEl);
+      row.appendChild(dest);
+      row.appendChild(timeEl);
+      row.appendChild(minEl);
+      depsEl.appendChild(row);
+    });
+  }
+
+  block.appendChild(depsEl);
+  return block;
+}
+
+function formatMinsAsTime(mins) {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() + mins);
+  return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+}
+
+// Parse HTM halte page HTML — returns same departure shape as OVAPI path
+// HTM page renders list items like: "12 13:19 Station DH Centraal"
+function parseHTMPage(html, showLines) {
+  const now = new Date();
+  const results = [];
+  // Match list items containing line number, time, destination
+  const re = /\[(\d+)\s+(\d{2}:\d{2})\s+([^\]]+)\]/g;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    const line = m[1];
+    const timeStr = m[2];
+    const dest = m[3].trim();
+    if (showLines.length && !showLines.includes(line)) continue;
+    const [hh, mm] = timeStr.split(':').map(Number);
+    const t = new Date(now);
+    t.setHours(hh, mm, 0, 0);
+    if (t < now) t.setDate(t.getDate() + 1); // past midnight wrap
+    const mins = Math.round((t - now) / 60000);
+    if (mins >= 0 && mins <= 60) results.push({ line, dest, mins });
+  }
+  return results.sort((a, b) => a.mins - b.mins).slice(0, 4);
+}
+
+async function fetchHTMFallback(stop) {
+  const url = `${CONFIG.proxyBase}/htm/${stop.htmSlug}`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('htm http ' + r.status);
+  const html = await r.text();
+  return parseHTMPage(html, stop.showLines);
+}
+
+async function loadTram() {
+  const container = document.getElementById('tram-stops');
+  container.innerHTML = '';
+
+  for (const stop of CONFIG.tramStops) {
+    let departures;
+    let source = 'mock'; // 'live' | 'schedule' | 'mock'
+
+    if (CONFIG.proxyBase && !stop.tpc.startsWith('TODO')) {
+      try {
+        const url = `${CONFIG.proxyBase}/tpc/${stop.tpc}`;
+        const r = await fetch(url);
+        const json = await r.json();
+        const passes = json[stop.tpc]?.Passes || {};
+        const now = new Date();
+
+        departures = Object.values(passes)
+          .map(p => {
+            const t = new Date(p.ExpectedDepartureTime);
+            const mins = Math.round((t - now) / 60000);
+            return { line: p.LinePublicNumber, dest: p.DestinationName50, mins };
+          })
+          .filter(d => d.mins >= 0 && d.mins <= 30)
+          .filter(d => stop.showLines.length === 0 || stop.showLines.includes(d.line))
+          .sort((a, b) => a.mins - b.mins)
+          .slice(0, 4);
+
+        source = 'live';
+      } catch(e) {
+        // OVAPI down — try HTM timetable
+        try {
+          departures = await fetchHTMFallback(stop);
+          source = 'schedule';
+        } catch(e2) {
+          departures = MOCK_TRAM[stop.tpc] || [];
+          source = 'mock';
+        }
+      }
+    } else {
+      departures = MOCK_TRAM[stop.tpc] || [];
+      source = 'mock';
+    }
+
+    container.appendChild(renderTram(departures, stop.name, stop.walkMins, source));
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// NS TRAINS
+// ══════════════════════════════════════════════════════════════
+
+function renderNS(trains, label, dest) {
+  const dir = document.createElement('div');
+  dir.className = 'ns-direction';
+
+  const hdr = document.createElement('div');
+  hdr.className = 'ns-header';
+  const fromEl = document.createElement('span');
+  fromEl.className = 'ns-from';
+  fromEl.textContent = `${label} → ${dest}`;
+  hdr.appendChild(fromEl);
+  dir.appendChild(hdr);
+
+  if (!trains || trains.length === 0) {
+    dir.innerHTML += '<span class="error">geen data</span>';
+    return dir;
+  }
+
+  trains.slice(0, 3).forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'ns-row';
+
+    const timeEl = document.createElement('span');
+    timeEl.className = 'ns-time';
+    timeEl.textContent = t.time;
+
+    const delayEl = document.createElement('span');
+    delayEl.className = 'ns-delay';
+    delayEl.textContent = t.delay > 0 ? `+${t.delay}'` : '';
+
+    const destEl = document.createElement('span');
+    destEl.className = 'ns-dest';
+    destEl.textContent = t.dest;
+
+    const trackEl = document.createElement('span');
+    trackEl.className = 'ns-track';
+    trackEl.textContent = t.track;
+
+    row.appendChild(timeEl);
+    row.appendChild(delayEl);
+    row.appendChild(destEl);
+    row.appendChild(trackEl);
+    dir.appendChild(row);
+  });
+
+  return dir;
+}
+
+async function loadNS() {
+  const container = document.getElementById('ns-trains');
+  container.innerHTML = '';
+
+  for (const stn of CONFIG.nsStations) {
+    let trains;
+
+    if (CONFIG.proxyBase && CONFIG.nsApiKey !== 'TODO_NS_API_KEY') {
+      try {
+        const url = `${CONFIG.proxyBase}/ns/departures?station=${stn.code}`;
+        const r = await fetch(url, {
+          headers: { 'Ocp-Apim-Subscription-Key': CONFIG.nsApiKey }
+        });
+        const json = await r.json();
+        const now = new Date();
+
+        trains = (json.payload?.departures || [])
+          .map(d => {
+            const dep = new Date(d.plannedDateTime);
+            const delay = d.actualDateTime
+              ? Math.round((new Date(d.actualDateTime) - dep) / 60000)
+              : 0;
+            return {
+              time: `${String(dep.getHours()).padStart(2,'0')}:${String(dep.getMinutes()).padStart(2,'0')}`,
+              delay: Math.max(0, delay),
+              dest: d.direction,
+              track: d.actualTrack || d.plannedTrack || '?',
+            };
+          })
+          .filter(d => stn.dest ? d.dest.toLowerCase().includes(stn.dest.toLowerCase()) : true)
+          .slice(0, 3);
+      } catch(e) {
+        trains = MOCK_NS[stn.code] || [];
+      }
+    } else {
+      trains = MOCK_NS[stn.code] || [];
+    }
+
+    container.appendChild(renderNS(trains, stn.label, stn.dest));
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// REFRESH
+// ══════════════════════════════════════════════════════════════
+
+function updateLastRefresh() {
+  const now = new Date();
+  const t = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  document.getElementById('last-update').textContent = `bijgewerkt ${t}`;
+}
+
+async function refresh() {
+  await Promise.all([loadRain(), loadTram(), loadNS()]);
+  updateLastRefresh();
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+updateClock();
+setInterval(updateClock, 15000);
+refresh();
+setInterval(refresh, 60000); // full refresh every minute
+
+// ── PWA SERVICE WORKER ────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/part/sw.js').catch(() => {});
+}
+</script>
+
+<!--
+════════════════════════════════════════════════════════════════
+ SETUP GUIDE — Railway + misego.app
+════════════════════════════════════════════════════════════════
+
+FILES TO ADD TO YOUR RAILWAY NODE PROJECT:
+  public/part.html          ← this file
+  public/part/manifest.json
+  public/part/sw.js
+  public/part/icon-192.png
+  public/part/icon-512.png
+
+─────────────────────────────────────────────────────────────────
+public/part/manifest.json
+─────────────────────────────────────────────────────────────────
+{
+  "name": "Part",
+  "short_name": "Part",
+  "description": "Den Haag transit board",
+  "start_url": "/part",
+  "display": "standalone",
+  "background_color": "#0f0f0e",
+  "theme_color": "#0f0f0e",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/part/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/part/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
+
+─────────────────────────────────────────────────────────────────
+public/part/sw.js  (minimal — enables PWA install, no caching)
+─────────────────────────────────────────────────────────────────
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', () => self.clients.claim());
+// No fetch handler — all requests hit the network live
+
+─────────────────────────────────────────────────────────────────
+Express routes to add to server.js / app.js
+─────────────────────────────────────────────────────────────────
+const NS_API_KEY = process.env.NS_API_KEY; // set in Railway env vars
+
+app.get('/part', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  res.sendFile(path.join(__dirname, 'public', 'part.html'));
+});
+app.use('/part/', express.static(path.join(__dirname, 'public', 'part')));
+
+app.get('/part/proxy/tpc/:code', async (req, res) => {
+  try {
+    const r = await fetch(`https://v0.ovapi.nl/tpc/${req.params.code}`);
+    res.json(await r.json());
+  } catch(e) { res.status(502).json({ error: 'ovapi unavailable' }); }
+});
+
+app.get('/part/proxy/ns/departures', async (req, res) => {
+  try {
+    const r = await fetch(
+      `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v3/departures?${new URLSearchParams(req.query)}`,
+      { headers: { 'Ocp-Apim-Subscription-Key': NS_API_KEY } }
+    );
+    res.json(await r.json());
+  } catch(e) { res.status(502).json({ error: 'ns unavailable' }); }
+});
+
+app.get('/part/proxy/htm/:slug', async (req, res) => {
+  try {
+    const r = await fetch(`https://www.htm.nl/haltes/${req.params.slug}/`);
+    res.send(await r.text());
+  } catch(e) { res.status(502).send(''); }
+});
+
+─────────────────────────────────────────────────────────────────
+STEP 1 — TPC stop codes
+  Go to https://www.ovzoeker.nl, search each stop name,
+  click it, note the Haltenummer, fill into CONFIG.tramStops[x].tpc
+  Verify: https://v0.ovapi.nl/tpc/{code}
+
+STEP 2 — NS API key
+  https://apiportal.ns.nl → free account → subscribe to Ns-App
+  Add NS_API_KEY to Railway environment variables (not in code)
+
+STEP 3 — Icons
+  Generate at https://maskable.app or any PWA icon tool
+  Dark background (#0f0f0e), tram or "P" glyph, export 192 + 512px
+  Drop in public/part/
+
+STEP 4 — Deploy to Railway, open misego.app/part in Chrome on Android
+  Chrome menu ⋮ → "Add to home screen" → installs as Part
+  For door board: Fully Kiosk Browser app, screen always on
+
+════════════════════════════════════════════════════════════════
+-->
+</body>
+</html>
