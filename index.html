@@ -302,9 +302,13 @@
   const dotButtons = document.querySelectorAll('.dot-nav button');
   const dotSections = Array.from(dotButtons).map(b => document.getElementById(b.dataset.target));
 
+  const navHeight = document.querySelector('nav').getBoundingClientRect().height;
+
   dotButtons.forEach((btn, i) => {
     btn.addEventListener('click', () => {
-      dotSections[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const target = dotSections[i];
+      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
     });
   });
 
