@@ -19,6 +19,8 @@
       --faint: rgba(245,242,238,0.15);
       --rule: rgba(245,242,238,0.08);
       --sage: #8FA67A;
+      --text-dimmed: #555550;
+      --dot-outline: #444440;
       --serif: 'DM Serif Display', serif;
       --sans: 'DM Sans', sans-serif;
       --radius: 14px;
@@ -107,6 +109,66 @@
     .dot-nav button:hover { background: rgba(245,242,238,0.6); }
     .dot-nav button.active { background: var(--sage); transform: scale(1.4); }
 
+    /* INTRO */
+    .intro-overlay { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; align-items: center; justify-content: center; padding: 2rem 0 5.5rem; transition: opacity 0.5s ease; }
+    .intro-overlay.exiting { opacity: 0; pointer-events: none; }
+    .intro-dot { position: fixed; border-radius: 50%; background: var(--sage); pointer-events: none; transform: translateY(-120vh) scale(1); }
+    .intro-dot.falling { animation: introBounce 2.8s forwards; }
+    .intro-dot.landed { transition: opacity 0.7s ease; opacity: 0; }
+
+    @keyframes introBounce {
+      0%   { transform: translateY(-120vh) scale(1);                                                         animation-timing-function: cubic-bezier(.55,.06,.68,.19); }
+      26%  { transform: translateY(0) scale(1.3, 0.7);                                                        animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+      30%  { transform: translateY(0) scale(0.88);                                                            animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+      46%  { transform: translateY(-46vh) scale(0.88);                                                        animation-timing-function: cubic-bezier(.55,.06,.68,.19); }
+      60%  { transform: translateY(0) scale(1.22, 0.78);                                                      animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+      63%  { transform: translateY(0) scale(0.74);                                                            animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+      75%  { transform: translateY(-23vh) scale(0.74);                                                        animation-timing-function: cubic-bezier(.55,.06,.68,.19); }
+      85%  { transform: translateY(0) scale(1.15, 0.85);                                                      animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+      87%  { transform: translateY(0) scale(0.6);                                                             animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+      94%  { transform: translateY(-9vh) scale(0.6);                                                          animation-timing-function: cubic-bezier(.55,.06,.68,.19); }
+      98%  { transform: translateY(0) scale(calc(var(--final-scale, 0.06) * 1.15), calc(var(--final-scale, 0.06) * 0.85)); animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+      100% { transform: translateY(0) scale(var(--final-scale, 0.06)); }
+    }
+
+    .intro-content { max-width: 640px; width: 90vw; max-height: 100%; overflow-y: auto; opacity: 0; transition: opacity 0.7s ease; scrollbar-width: none; }
+    .intro-content::-webkit-scrollbar { display: none; }
+    .intro-content.visible { opacity: 1; }
+
+    .intro-header { padding: 0 12px; margin-bottom: 0.6rem; }
+    .intro-eyebrow { font-family: var(--sans); font-size: 10px; color: var(--sage); font-weight: 500; letter-spacing: 2px; }
+    .intro-title { font-family: var(--serif); font-size: 26px; color: var(--text); font-weight: 400; margin-top: 2px; }
+
+    .intro-pills { display: flex; gap: 6px; padding: 0 12px; margin-bottom: 0.7rem; }
+    .intro-pill { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.3px; padding: 5px 12px; border-radius: 20px; background: var(--bg2); color: var(--text-dimmed); border: none; cursor: pointer; transition: background 0.15s, color 0.15s; }
+    .intro-pill.active { background: var(--sage); color: var(--bg); }
+
+    .pantry-grid { display: flex; align-items: stretch; padding: 0 4px 20px; }
+    .pantry-col { flex: 1; min-width: 0; padding: 0 12px; }
+    .pantry-col-divider { width: 0.5px; background: rgba(245,242,238,0.07); flex-shrink: 0; }
+
+    .category-block { margin-bottom: 8px; }
+    .category-block.hidden { display: none; }
+    .category-label { font-family: var(--sans); font-size: 9px; color: var(--sage); font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; display: block; margin-bottom: 5px; }
+    .category-rule { height: 0.5px; background: rgba(245,242,238,0.07); border: none; margin-bottom: 1px; }
+
+    .item-row { display: flex; align-items: center; justify-content: space-between; gap: 7px; padding: 4px 0; border-bottom: 0.5px solid rgba(245,242,238,0.07); cursor: pointer; user-select: none; }
+    .item-row:last-child { border-bottom: none; }
+    .item-row.hidden { display: none; }
+    .item-name { font-family: var(--sans); font-size: 12px; font-weight: 300; line-height: 1.4; color: var(--text); }
+    .item-name.dimmed { color: var(--text-dimmed); }
+    .level-dots { display: flex; gap: 3px; flex-shrink: 0; }
+    .level-dot { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--dot-outline); background: transparent; }
+    .level-dot.filled { background: var(--sage); border-color: var(--sage); }
+
+    .intro-exit { position: fixed; bottom: 2.6rem; left: 50%; transform: translateX(-50%); font-family: var(--serif); font-size: 1rem; color: var(--text); text-decoration: none; opacity: 0; transition: opacity 0.7s ease, color 0.2s; z-index: 2; }
+    .intro-exit.visible { opacity: 0.85; }
+    .intro-exit:hover { opacity: 1; color: var(--sage); }
+
+    @media (max-width: 899px) {
+      .intro-overlay { display: none !important; }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 820px) {
       .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 5vw; }
@@ -131,6 +193,23 @@
   </style>
 </head>
 <body>
+
+<div class="intro-overlay" id="intro">
+  <div class="intro-dot" id="introDot"></div>
+  <div class="intro-content" id="introContent">
+    <div class="intro-header">
+      <span class="intro-eyebrow">LARDER: MISE EN GO</span>
+      <div class="intro-title">Larder</div>
+    </div>
+    <div class="intro-pills" id="introPills"></div>
+    <div class="pantry-grid" id="pantryGrid">
+      <div class="pantry-col" id="pantryColLeft"></div>
+      <div class="pantry-col-divider"></div>
+      <div class="pantry-col" id="pantryColRight"></div>
+    </div>
+  </div>
+  <a href="#" class="intro-exit" id="introExit">Enter site &rarr;</a>
+</div>
 
 <nav>
   <a href="/" class="logo">Larder<span class="logo-sub"> &middot; Mise en Go</span></a>
@@ -243,6 +322,231 @@
   <button data-target="how" aria-label="Go to how it works section"></button>
   <button data-target="download" aria-label="Go to pricing section"></button>
 </nav>
+
+<script>
+(function () {
+  const SKIP = window.innerWidth < 900 || sessionStorage.getItem('misegoIntroPlayed');
+  const introEl = document.getElementById('intro');
+  if (SKIP) { introEl.remove(); return; }
+  sessionStorage.setItem('misegoIntroPlayed', '1');
+  document.body.style.overflow = 'hidden';
+
+  const LEVELS = ['full', 'good', 'low', 'out'];
+  const NEXT_LEVEL = { full: 'good', good: 'low', low: 'out', out: 'full' };
+  const SOLID_COUNT = { full: 3, good: 2, low: 1, out: 0 };
+
+  const LEFT_CATEGORIES = [
+    { label: 'Baking', items: [
+      { name: 'AP Flour', level: 'full' },
+      { name: 'Panko Crumbs', level: 'full' },
+      { name: 'Salt', level: 'full' },
+      { name: 'Sugar', level: 'full' },
+    ]},
+    { label: 'Cereal Pasta & Grains', items: [
+      { name: 'Basmati Rice', level: 'full' },
+      { name: 'Bulgur Wheat', level: 'full' },
+      { name: 'Carnaroli Rice', level: 'full' },
+      { name: 'Couscous', level: 'full' },
+      { name: 'Farro', level: 'full' },
+      { name: 'Pasta', level: 'full' },
+      { name: 'Polenta', level: 'full' },
+      { name: 'Sushi Rice', level: 'full' },
+    ]},
+    { label: 'Cooking Sauces/Pastes', items: [
+      { name: 'Balsamic Vinegar', level: 'full' },
+      { name: 'Brown Rice Vinegar', level: 'full' },
+      { name: 'Harissa Paste', level: 'full' },
+      { name: 'Mirin', level: 'full' },
+      { name: 'Miso', level: 'full' },
+    ]},
+  ];
+
+  const RIGHT_CATEGORIES = [
+    { label: 'Boxed/Canned Foods', items: [
+      { name: 'Anchovies', level: 'full' },
+      { name: 'Bonito Flakes', level: 'good' },
+      { name: 'Canned Cannellini Beans', level: 'low' },
+      { name: 'Canned Chickpeas', level: 'out' },
+      { name: 'Canned Kidney Beans', level: 'full' },
+      { name: 'Canned Tomato', level: 'full' },
+      { name: 'Coconut Milk', level: 'full' },
+      { name: 'Kombu', level: 'out' },
+      { name: 'Yaki-Nori', level: 'full' },
+    ]},
+    { label: 'Condiments', items: [
+      { name: 'Capers', level: 'full' },
+      { name: 'Ketchup', level: 'full' },
+      { name: 'Mayonnaise', level: 'full' },
+      { name: 'Olives', level: 'full' },
+      { name: 'Peperoncini', level: 'full' },
+      { name: 'Preserved Lemon', level: 'full' },
+      { name: 'Wasabi', level: 'full' },
+    ]},
+    { label: 'Oil & Fats', items: [
+      { name: 'Coconut Oil', level: 'full' },
+    ]},
+  ];
+
+  const PILLS = [
+    { key: 'all', label: 'All' },
+    { key: 'low', label: 'Low' },
+    { key: 'out', label: 'Out' },
+    { key: 'consol', label: 'Consol' },
+  ];
+  let activeFilter = 'all';
+
+  function itemMatchesFilter(item) {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'low') return item.level === 'low';
+    if (activeFilter === 'out') return item.level === 'out';
+    if (activeFilter === 'consol') return item.level === 'low' || item.level === 'out';
+    return true;
+  }
+
+  function buildDots(item) {
+    const wrap = document.createElement('div');
+    wrap.className = 'level-dots';
+    const solid = SOLID_COUNT[item.level];
+    for (let i = 0; i < 3; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'level-dot' + (i < solid ? ' filled' : '');
+      wrap.appendChild(dot);
+    }
+    return wrap;
+  }
+
+  function refreshRow(row, item) {
+    const nameEl = row.querySelector('.item-name');
+    const dimmed = activeFilter === 'all' && item.level === 'out';
+    nameEl.classList.toggle('dimmed', dimmed);
+    const oldDots = row.querySelector('.level-dots');
+    const newDots = buildDots(item);
+    row.replaceChild(newDots, oldDots);
+    row.classList.toggle('hidden', !itemMatchesFilter(item));
+  }
+
+  function refreshCategoryVisibility(block, items) {
+    const anyVisible = items.some(itemMatchesFilter);
+    block.classList.toggle('hidden', !anyVisible);
+  }
+
+  let landingTargetDot = null;
+
+  function renderColumn(container, categories, isFirstColumn) {
+    categories.forEach((cat, catIndex) => {
+      const block = document.createElement('div');
+      block.className = 'category-block';
+
+      const label = document.createElement('span');
+      label.className = 'category-label';
+      label.textContent = cat.label;
+      block.appendChild(label);
+
+      const rule = document.createElement('hr');
+      rule.className = 'category-rule';
+      block.appendChild(rule);
+
+      cat.items.forEach((item, itemIndex) => {
+        const row = document.createElement('div');
+        row.className = 'item-row';
+
+        const nameEl = document.createElement('span');
+        nameEl.className = 'item-name';
+        nameEl.textContent = item.name;
+        row.appendChild(nameEl);
+        row.appendChild(buildDots(item));
+
+        row.addEventListener('click', () => {
+          item.level = NEXT_LEVEL[item.level];
+          refreshRow(row, item);
+          refreshCategoryVisibility(block, cat.items);
+        });
+
+        refreshRow(row, item);
+        block.appendChild(row);
+
+        if (isFirstColumn && catIndex === 0 && itemIndex === 0) {
+          landingTargetDot = row.querySelector('.level-dot');
+        }
+      });
+
+      refreshCategoryVisibility(block, cat.items);
+      container.appendChild(block);
+    });
+  }
+
+  function refreshEverything() {
+    const blocks = document.querySelectorAll('#pantryGrid .category-block');
+    const allCats = LEFT_CATEGORIES.concat(RIGHT_CATEGORIES);
+    blocks.forEach((block, catIdx) => {
+      const cat = allCats[catIdx];
+      const rows = block.querySelectorAll('.item-row');
+      rows.forEach((row, itemIdx) => {
+        refreshRow(row, cat.items[itemIdx]);
+      });
+      refreshCategoryVisibility(block, cat.items);
+    });
+  }
+
+  function renderPills() {
+    const container = document.getElementById('introPills');
+    PILLS.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'intro-pill' + (p.key === activeFilter ? ' active' : '');
+      btn.textContent = p.label;
+      btn.addEventListener('click', () => {
+        activeFilter = p.key;
+        container.querySelectorAll('.intro-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        refreshEverything();
+      });
+      container.appendChild(btn);
+    });
+  }
+
+  renderColumn(document.getElementById('pantryColLeft'), LEFT_CATEGORIES, true);
+  renderColumn(document.getElementById('pantryColRight'), RIGHT_CATEGORIES, false);
+  renderPills();
+
+  // Drop-bounce sequence
+  const dotEl = document.getElementById('introDot');
+  const introContent = document.getElementById('introContent');
+  const introExit = document.getElementById('introExit');
+
+  requestAnimationFrame(() => {
+    const rect = landingTargetDot.getBoundingClientRect();
+    const startSize = Math.min(140, window.innerHeight * 0.16);
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const finalScale = rect.width / startSize;
+
+    dotEl.style.width = startSize + 'px';
+    dotEl.style.height = startSize + 'px';
+    dotEl.style.left = centerX + 'px';
+    dotEl.style.top = centerY + 'px';
+    dotEl.style.marginLeft = (-startSize / 2) + 'px';
+    dotEl.style.marginTop = (-startSize / 2) + 'px';
+    dotEl.style.setProperty('--final-scale', finalScale);
+
+    requestAnimationFrame(() => dotEl.classList.add('falling'));
+  });
+
+  dotEl.addEventListener('animationend', () => {
+    dotEl.classList.add('landed');
+    introContent.classList.add('visible');
+    introExit.classList.add('visible');
+  });
+
+  introExit.addEventListener('click', (e) => {
+    e.preventDefault();
+    introEl.classList.add('exiting');
+    setTimeout(() => {
+      introEl.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 520);
+  });
+})();
+</script>
 
 <script>
   const steps = [
