@@ -110,7 +110,7 @@
     .dot-nav button.active { background: var(--sage); transform: scale(1.4); }
 
     /* INTRO */
-    .intro-overlay { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; align-items: center; justify-content: center; padding: 2rem 0 5.5rem; transition: opacity 0.5s ease; }
+    .intro-overlay { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; align-items: flex-start; justify-content: center; padding: 12vh 0 5.5rem; transition: opacity 0.5s ease; }
     .intro-overlay.exiting { opacity: 0; pointer-events: none; }
     .intro-dot { position: fixed; border-radius: 50%; background: var(--sage); pointer-events: none; left: var(--start-left, -200px); transform: translateY(var(--dy0, -120vh)) scale(1); }
     .intro-dot.falling { animation: introBounceY 3.1s forwards, introMoveX 3.1s linear forwards; }
