@@ -65,7 +65,7 @@
     .rule { border: none; border-top: 0.5px solid var(--rule); margin: 0 5vw; }
 
     /* STEPS */
-    .steps-section { display: grid; grid-template-columns: 3fr 2fr; align-items: start; padding: 3.75rem 5vw 6rem; max-width: 1400px; gap: 4rem; }
+    .steps-section { display: grid; grid-template-columns: 3fr 2fr; align-items: start; padding: 3.75rem 5vw 3.75rem; max-width: 1400px; gap: 4rem; overflow: hidden; }
     .steps-copy { grid-column: 1; }
     .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
     .steps-section h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; margin-bottom: 2rem; line-height: 1.15; }
@@ -82,15 +82,15 @@
     .step-content { grid-column: 2; padding-top: 0.3rem; }
     .step-content h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.2; }
     .step-content p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); max-width: 42ch; }
-    .step-screen { grid-column: 2; display: flex; justify-content: flex-start; transform: translateY(-74px); }
+    .step-screen { grid-column: 2; display: flex; justify-content: flex-start; align-self: start; }
     .step-screen img { transition: opacity 0.3s ease; }
 
     /* PRICING */
-    .pricing { padding: 5rem 5vw 40vh; display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; max-width: 1400px; scroll-margin-top: 60px; }
+    .pricing { padding: 5rem 5vw 6rem; display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; max-width: 1400px; }
     .pricing-copy { text-align: left; }
     .pricing-copy .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
     .pricing-copy h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; margin-bottom: 1rem; line-height: 1.15; }
-    .pricing-copy p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); max-width: 44ch; }
+    .pricing-copy p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); }
     .pricing-card { border: 0.5px solid rgba(245,242,238,0.15); border-radius: var(--radius); padding: 2.5rem; }
     .price-amount { font-family: var(--serif); font-size: 3rem; font-weight: 400; margin-bottom: 0.3rem; display: flex; align-items: baseline; gap: 0.7rem; }
     .price-was { font-family: var(--sans); font-size: 1.1rem; color: var(--dim); text-decoration: line-through; }
