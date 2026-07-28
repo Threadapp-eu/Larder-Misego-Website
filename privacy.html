@@ -16,10 +16,10 @@
       --serif: 'DM Serif Display', serif; --sans: 'DM Sans', sans-serif;
     }
     body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 2.5rem; border-bottom: 0.5px solid var(--rule-mid); }
-    .logo { font-family: var(--serif); font-size: 1rem; color: var(--text); text-decoration: none; }
-    .logo-sub { color: var(--text-dim); }
-    .nav-back { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 5vw; border-bottom: 0.5px solid var(--rule); }
+    .logo { font-family: var(--serif); font-size: 1.4rem; color: var(--text); text-decoration: none; letter-spacing: 0.02em; -webkit-text-stroke: 0.4px currentColor; }
+    .logo-sub { color: #8FA67A; }
+    .nav-back { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; font-family: var(--sans); }
     .nav-back:hover { color: var(--text-muted); }
     .content { max-width: 680px; margin: 0 auto; padding: 24px 24px 6rem; }
     .eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
@@ -61,6 +61,7 @@
       <li>Fresh This Week items</li>
       <li>App preferences and settings</li>
     </ul>
+    <p>Because this data lives entirely on your device, uninstalling the app or clearing local app storage permanently removes it. You can back up your data anytime using the Google Drive backup feature.</p>
 
     <h2>Sent to our servers</h2>
        <h3> Import quota identifier</h3>
@@ -101,7 +102,7 @@
   </div>
 
   <footer>
-    <div class="footer-brand">Larder &middot; Mise en Go</div>
+    <div class="footer-brand">Larder &middot; Mise en Go &middot; The Hague, NL</div>
     <div class="footer-links">
       <a href="privacy.html" class="footer-link">Privacy Policy</a>
       <a href="terms.html" class="footer-link">Terms of Service</a>
