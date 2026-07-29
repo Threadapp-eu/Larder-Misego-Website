@@ -85,6 +85,12 @@
     .step-screen { grid-column: 2; display: flex; justify-content: flex-start; transform: translateY(-74px); }
     .step-screen img { transition: opacity 0.3s ease; }
 
+    /* SCREENSHOTS (mobile only) */
+    .screenshots-mobile { display: none; padding: 2rem 0 2rem 4vw; }
+    .screenshots-strip { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-right: 4vw; padding-bottom: 0.5rem; }
+    .screenshots-strip img { flex: 0 0 220px; scroll-snap-align: start; height: auto; border-radius: 24px; }
+    .screenshots-strip::-webkit-scrollbar { display: none; }
+
     /* PRICING */
     .pricing { padding: 5rem 5vw 40vh; display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; max-width: 1400px; scroll-margin-top: 60px; }
     .pricing-copy { text-align: left; }
@@ -197,6 +203,9 @@
       .pricing { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 5vw; }
       .pricing-card { padding: 2rem; }
       .price-amount { font-size: 2.2rem; }
+      .screenshots-mobile { display: block; }
+      .hero-screens { display: none; }
+      .step-screen { display: none; }
     }
     @media (max-width: 500px) {
       .step-nav-item { font-size: 0.7rem; padding: 0.7rem 0.6rem; }
@@ -205,6 +214,7 @@
       .steps-section, .pricing { padding-left: 4vw; padding-right: 4vw; }
       nav { padding: 1.1rem 4vw; }
       .logo { font-size: 1.15rem; }
+      .hero-copy h1 { font-size: clamp(1.6rem, 8vw, 2.2rem); }
     }
     @media (max-width: 600px) {
       .dot-nav { display: none; }
@@ -293,6 +303,17 @@
 
   <div class="step-screen">
     <img id="step-image" src="images/screen-onboarding-portrait.png" alt="Onboarding cuisine selection screen">
+  </div>
+</section>
+
+<section class="screenshots-mobile">
+  <span class="section-eyebrow">Screenshots</span>
+  <div class="screenshots-strip">
+    <img src="images/screen-onboarding-portrait.png" alt="Onboarding screen">
+    <img src="images/screen-recipes-portrait.png" alt="Recipes screen">
+    <img src="images/screen-detail-portrait.png" alt="Recipe detail screen">
+    <img src="images/screen-export-portrait.png" alt="Shopping list export">
+    <img src="images/screen-fresh-portrait.png" alt="Cook mode screen">
   </div>
 </section>
 
