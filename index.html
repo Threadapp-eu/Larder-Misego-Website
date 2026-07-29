@@ -187,34 +187,27 @@
 
     /* RESPONSIVE */
     @media (max-width: 820px) {
-      .hero { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 5vw; }
-      .hero-copy h1 { font-size: clamp(1.9rem, 6.5vw, 3rem); }
-      .hero-screens { margin: 0 auto; }
-      .hero-screens img { max-width: min(320px, 80vw); }
-      .steps-section { grid-template-columns: 1fr; row-gap: 2rem; }
+      .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 4vw; }
+      .hero-copy h1 { font-size: clamp(1.6rem, 7vw, 2.4rem); line-height: 1.1; }
+      .hero-screens { display: none; }
+      .steps-section { grid-template-columns: 1fr; padding: 2.5rem 4vw; gap: 1.5rem; }
       .steps-copy { grid-column: 1; max-width: none; }
-      .steps-layout { grid-template-columns: 1fr; row-gap: 1.5rem; }
-      .steps-sidebar { grid-column: 1; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 0.5px solid var(--rule); gap: 0.5rem; padding-bottom: 0.5rem; }
-      .step-nav-item { border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+      .steps-layout { grid-template-columns: 1fr; }
+      .steps-sidebar { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 0.5px solid var(--rule); gap: 0; padding-bottom: 0.5rem; }
+      .step-nav-item { border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; font-size: 0.7rem; padding: 0.6rem 0.8rem; }
       .step-nav-item.active { border-bottom-color: var(--sage); background: none; }
       .step-content { grid-column: 1; }
-      .step-screen { grid-column: 1; order: -1; align-self: center; justify-content: center; transform: none; }
-      .step-screen img { max-width: min(280px, 75vw); }
-      .pricing { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 5vw; }
-      .pricing-card { padding: 2rem; }
-      .price-amount { font-size: 2.2rem; }
-      .screenshots-mobile { display: block; }
-      .hero-screens { display: none; }
       .step-screen { display: none; }
+      .screenshots-mobile { display: block; }
+      .screenshots-strip img { flex: 0 0 auto; height: 75vh; width: auto; border-radius: 20px; }
+      .pricing { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 4vw; }
+      .pricing-card { padding: 1.5rem; }
+      .dot-nav { display: none; }
     }
     @media (max-width: 500px) {
-      .step-nav-item { font-size: 0.7rem; padding: 0.7rem 0.6rem; }
-      .hero { padding: 2rem 4vw; }
-      .rule { margin: 0 4vw; }
-      .steps-section, .pricing { padding-left: 4vw; padding-right: 4vw; }
-      nav { padding: 1.1rem 4vw; }
-      .logo { font-size: 1.15rem; }
-      .hero-copy h1 { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+      nav { padding: 1rem 4vw; }
+      .hero { padding: 1.5rem 4vw; }
+      .hero-copy h1 { font-size: clamp(1.5rem, 8vw, 2rem); }
     }
     @media (max-width: 600px) {
       .dot-nav { display: none; }
