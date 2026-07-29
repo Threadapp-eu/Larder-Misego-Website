@@ -192,12 +192,12 @@
       .nav-cta { font-size: 0.6rem; padding: 0.45rem 0.75rem; letter-spacing: 0.08em; }
       .nav-legal { display: none; }
       .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 4vw; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-      section.hero { min-height: 100vh !important; }
+      section.hero { min-height: 100vh !important; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 2.5rem; }
       .hero-copy h1 { font-size: clamp(1.4rem, 6.5vw, 2rem); line-height: 1.1; }
       .hero-copy .eyebrow { letter-spacing: 0.1em; font-size: 0.6rem; }
       .hero-screens { display: none; }
       .btn { font-size: 0.65rem; padding: 0.75rem 1.25rem; }
-      .steps-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; grid-template-columns: 1fr; padding: 2rem 4vw; gap: 1.5rem; }
+      .steps-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-start; grid-template-columns: 1fr; padding: 2rem 4vw; padding-top: 2.5rem; gap: 1.5rem; }
       .steps-copy { grid-column: 1; max-width: none; }
       .steps-layout { grid-template-columns: 1fr; }
       .steps-sidebar { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 0.5px solid var(--rule); gap: 0; padding-bottom: 0.5rem; }
@@ -205,10 +205,13 @@
       .step-nav-item.active { border-bottom-color: var(--sage); background: none; }
       .step-content { grid-column: 1; }
       .step-screen { display: none; }
-      .screenshots-mobile { display: flex; flex-direction: column; justify-content: center; min-height: 100vh; padding: 2rem 4vw; }
+      .screenshots-mobile { display: flex; flex-direction: column; justify-content: flex-start; min-height: 100vh; padding: 2rem 4vw; padding-top: 2.5rem; }
       .screenshots-strip img { flex: 0 0 auto; height: 70vh; width: auto; border-radius: 20px; }
-      .pricing { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; grid-template-columns: 1fr; padding: 2rem 4vw; gap: 2rem; }
+      .pricing { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-start; grid-template-columns: 1fr; padding: 2rem 4vw; padding-top: 2.5rem; gap: 2rem; }
       .pricing-card { padding: 1.5rem; }
+      .hero-copy, .steps-copy, .steps-layout, .pricing-copy, .pricing-card { padding-right: 2.5rem; }
+      .pricing-copy p { display: none; }
+      .screenshots-strip { padding-left: 4vw; }
     }
     @media (max-width: 500px) {
       nav { padding: 1rem 4vw; }
