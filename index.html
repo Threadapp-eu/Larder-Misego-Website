@@ -187,10 +187,17 @@
 
     /* RESPONSIVE */
     @media (max-width: 820px) {
-      .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 4vw; }
-      .hero-copy h1 { font-size: clamp(1.6rem, 7vw, 2.4rem); line-height: 1.1; }
+      nav { padding: 0.9rem 4vw; }
+      .logo { font-size: 1.1rem; }
+      .nav-cta { font-size: 0.6rem; padding: 0.45rem 0.75rem; letter-spacing: 0.08em; }
+      .nav-legal { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 4vw; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+      section.hero { min-height: 100vh !important; }
+      .hero-copy h1 { font-size: clamp(1.4rem, 6.5vw, 2rem); line-height: 1.1; }
+      .hero-copy .eyebrow { letter-spacing: 0.1em; font-size: 0.6rem; }
       .hero-screens { display: none; }
-      .steps-section { grid-template-columns: 1fr; padding: 2.5rem 4vw; gap: 1.5rem; }
+      .btn { font-size: 0.65rem; padding: 0.75rem 1.25rem; }
+      .steps-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; grid-template-columns: 1fr; padding: 2rem 4vw; gap: 1.5rem; }
       .steps-copy { grid-column: 1; max-width: none; }
       .steps-layout { grid-template-columns: 1fr; }
       .steps-sidebar { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 0.5px solid var(--rule); gap: 0; padding-bottom: 0.5rem; }
@@ -198,19 +205,15 @@
       .step-nav-item.active { border-bottom-color: var(--sage); background: none; }
       .step-content { grid-column: 1; }
       .step-screen { display: none; }
-      .screenshots-mobile { display: block; }
-      .screenshots-strip img { flex: 0 0 auto; height: 75vh; width: auto; border-radius: 20px; }
-      .pricing { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 4vw; }
+      .screenshots-mobile { display: flex; flex-direction: column; justify-content: center; min-height: 100vh; padding: 2rem 4vw; }
+      .screenshots-strip img { flex: 0 0 auto; height: 70vh; width: auto; border-radius: 20px; }
+      .pricing { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; grid-template-columns: 1fr; padding: 2rem 4vw; gap: 2rem; }
       .pricing-card { padding: 1.5rem; }
-      .dot-nav { display: none; }
     }
     @media (max-width: 500px) {
       nav { padding: 1rem 4vw; }
       .hero { padding: 1.5rem 4vw; }
       .hero-copy h1 { font-size: clamp(1.5rem, 8vw, 2rem); }
-    }
-    @media (max-width: 600px) {
-      .dot-nav { display: none; }
     }
   </style>
 </head>
@@ -299,7 +302,7 @@
   </div>
 </section>
 
-<section class="screenshots-mobile">
+<section class="screenshots-mobile" id="screenshots">
   <span class="section-eyebrow">Screenshots</span>
   <div class="screenshots-strip">
     <img src="images/screen-onboarding-portrait.png" alt="Onboarding screen">
@@ -343,11 +346,7 @@
   </div>
 </footer>
 
-<nav class="dot-nav" aria-label="Section navigation">
-  <button data-target="hero" aria-label="Go to hero section"></button>
-  <button data-target="how" aria-label="Go to how it works section"></button>
-  <button data-target="download" aria-label="Go to pricing section"></button>
-</nav>
+<nav class="dot-nav" aria-label="Section navigation"></nav>
 
 <script>
 (function () {
@@ -637,8 +636,29 @@
     });
   });
 
-  const dotButtons = document.querySelectorAll('.dot-nav button');
-  const dotSections = Array.from(dotButtons).map(b => document.getElementById(b.dataset.target));
+  const isMobile = window.matchMedia('(max-width: 820px)').matches;
+  const DOT_TARGETS = isMobile
+    ? [
+        { id: 'hero', label: 'Go to hero section' },
+        { id: 'how', label: 'Go to how it works section' },
+        { id: 'screenshots', label: 'Go to screenshots section' },
+        { id: 'download', label: 'Go to pricing section' }
+      ]
+    : [
+        { id: 'hero', label: 'Go to hero section' },
+        { id: 'how', label: 'Go to how it works section' },
+        { id: 'download', label: 'Go to pricing section' }
+      ];
+
+  const dotNav = document.querySelector('.dot-nav');
+  const dotSections = DOT_TARGETS.map(t => document.getElementById(t.id));
+  const dotButtons = DOT_TARGETS.map(t => {
+    const btn = document.createElement('button');
+    btn.dataset.target = t.id;
+    btn.setAttribute('aria-label', t.label);
+    dotNav.appendChild(btn);
+    return btn;
+  });
 
   const navHeight = document.querySelector('nav').getBoundingClientRect().height;
 
