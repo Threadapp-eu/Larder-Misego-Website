@@ -346,14 +346,10 @@
     <div class="price-founding">One-time purchase &middot; Own it forever</div>
     <div class="price-note">*Founding Cohort: Limited to the first 100 users</div>
     <a href="#" class="btn">Get Larder on Google Play</a>
-    <div class="ios-waitlist">
+  <div class="ios-waitlist">
   <span class="ios-waitlist-label">Coming soon to iOS</span>
-  <div class="ios-waitlist-form">
-    <input type="email" class="ios-waitlist-input" id="iosEmail" placeholder="your@email.com" autocomplete="email">
-    <button class="ios-waitlist-btn" id="iosNotifyBtn" onclick="submitIosWaitlist()">Notify me</button>
-  </div>
-  <div class="ios-waitlist-msg" id="iosMsg"></div>
-</div>
+  <a href="https://b2036c2a.sibforms.com/serve/MUIFAAZGNAZH7y9kf4z6ITw4aQA4eeWixPbkmfU5cLHdXVEZ0xYWzvRSLfbstobHZqncYJ_q-yQlwyCJoxKFO0EAFxKfUn8wiTwEUZZrMdmj3Xl8Adm1TdHOYIi3FLWVVd1ZA7cvtktV7dJ1oNQ1T2R-TkReEZbVVFj9eaT5zXa0xtAuq7o3IRDSQD1m-ad-zS0ITOkQgCrmjaUgPw==" target="_blank" rel="noopener" class="ios-waitlist-btn" style="display:inline-block;text-decoration:none;margin-top:0.2rem;">Notify me when it launches</a>
+</div>  
   </div>
 </section>
 
@@ -707,66 +703,6 @@
   }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
 
   dotSections.forEach(section => dotObserver.observe(section));
-</script>
-<script>
-async function submitIosWaitlist() {
-  const input = document.getElementById('iosEmail');
-  const btn = document.getElementById('iosNotifyBtn');
-  const msg = document.getElementById('iosMsg');
-  const email = input.value.trim();
-
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    msg.textContent = 'Please enter a valid email address.';
-    msg.className = 'ios-waitlist-msg error';
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = '...';
-  msg.textContent = '';
-
-  try {
-    const res = await fetch('https://api.brevo.com/v3/contacts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-key': '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'
-      },
-      body: JSON.stringify({
-        email: email,
-        listIds: [4],
-        updateEnabled: true
-      })
-    });
-
-    if (res.status === 201 || res.status === 204) {
-      msg.textContent = "You're on the list. We'll let you know when iOS launches.";
-      msg.className = 'ios-waitlist-msg success';
-      input.value = '';
-    } else if (res.status === 400) {
-      const data = await res.json();
-      if (data.code === 'duplicate_parameter') {
-        msg.textContent = "You're already on the list.";
-        msg.className = 'ios-waitlist-msg success';
-      } else {
-        throw new Error(data.message || 'Bad request');
-      }
-    } else {
-      throw new Error('Unexpected response');
-    }
-  } catch (e) {
-    msg.textContent = 'Something went wrong. Try again or email hello@misego.app.';
-    msg.className = 'ios-waitlist-msg error';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Notify me';
-  }
-}
-
-document.getElementById('iosEmail').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') submitIosWaitlist();
-});
-</script>
-  
+</script>  
 </body>
 </html>
