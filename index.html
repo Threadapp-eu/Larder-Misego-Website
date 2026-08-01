@@ -231,6 +231,18 @@
       .hero { padding: 1.5rem 4vw; }
       .hero-copy h1 { font-size: clamp(1.5rem, 8vw, 2rem); }
     }
+    .ios-waitlist { margin-top: 2rem; padding-top: 1.5rem; border-top: 0.5px solid var(--rule); }
+.ios-waitlist-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.9rem; display: block; }
+.ios-waitlist-form { display: flex; gap: 0.5rem; }
+.ios-waitlist-input { flex: 1; background: transparent; border: 1px solid var(--faint); border-radius: 5px; padding: 0.7rem 1rem; color: var(--text); font-family: var(--sans); font-size: 0.82rem; font-weight: 300; outline: none; transition: border-color 0.2s; min-width: 0; }
+.ios-waitlist-input::placeholder { color: var(--dim); }
+.ios-waitlist-input:focus { border-color: rgba(245,242,238,0.35); }
+.ios-waitlist-btn { background: transparent; border: 1px solid var(--text); border-radius: 5px; color: var(--text); font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.1rem; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+.ios-waitlist-btn:hover { background: var(--text); color: #1A1A1A; }
+.ios-waitlist-btn:disabled { opacity: 0.5; cursor: default; }
+.ios-waitlist-msg { font-size: 0.8rem; margin-top: 0.7rem; min-height: 1.2em; }
+.ios-waitlist-msg.success { color: var(--sage); }
+.ios-waitlist-msg.error { color: #c47a5a; }
   </style>
 </head>
 <body>
@@ -340,6 +352,10 @@
     <div class="price-founding">One-time purchase &middot; Own it forever</div>
     <div class="price-note">*Founding Cohort: Limited to the first 100 users</div>
     <a href="#" class="btn">Get Larder on Google Play</a>
+  <div class="ios-waitlist">
+  <span class="ios-waitlist-label">Coming soon to iOS</span>
+  <a href="https://b2036c2a.sibforms.com/serve/MUIFAAZGNAZH7y9kf4z6ITw4aQA4eeWixPbkmfU5cLHdXVEZ0xYWzvRSLfbstobHZqncYJ_q-yQlwyCJoxKFO0EAFxKfUn8wiTwEUZZrMdmj3Xl8Adm1TdHOYIi3FLWVVd1ZA7cvtktV7dJ1oNQ1T2R-TkReEZbVVFj9eaT5zXa0xtAuq7o3IRDSQD1m-ad-zS0ITOkQgCrmjaUgPw==" target="_blank" rel="noopener" class="ios-waitlist-btn" style="display:inline-block;text-decoration:none;margin-top:0.2rem;">Notify me when it launches</a>
+</div>  
   </div>
 </section>
 
@@ -348,7 +364,7 @@
 <footer>
   <div>
     <div class="footer-brand">Larder &middot; Mise en Go</div>
-    <div class="footer-copy">&copy; 2026 Nuttig &middot; misego.app &middot; The Hague, NL &middot; KVK: <!-- INSERT KVK NUMBER --></div>
+      <div class="footer-copy">&copy; 2026 Nuttig &middot; misego.app &middot; NL &middot; KVK: 42128344</div>
   </div>
   <div class="footer-links">
     <a href="privacy.html" class="footer-link">Privacy Policy</a>
@@ -717,7 +733,6 @@
   }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
 
   dotSections.forEach(section => dotObserver.observe(section));
-</script>
-
+</script>  
 </body>
 </html>
