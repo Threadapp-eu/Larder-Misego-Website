@@ -187,6 +187,17 @@
       .intro-overlay { display: none !important; }
     }
 
+    /* MOBILE INTRO */
+    .mobile-intro-overlay { display: none; position: fixed; inset: 0; z-index: 9999; background: var(--bg); flex-direction: column; }
+    @media (max-width: 899px) {
+      .mobile-intro-overlay { display: flex; }
+    }
+    .mobile-intro-overlay .intro-header { padding: 7vh 20px 0.6rem; margin-bottom: 0; flex-shrink: 0; }
+    .mobile-intro-overlay .pantry-grid { flex: 1; overflow-y: auto; padding-top: 0.5rem; padding-bottom: 5rem; -webkit-overflow-scrolling: touch; }
+    .mobile-intro-overlay .level-dots { transition: opacity 0.15s ease; }
+    .mobile-intro-overlay .intro-exit { opacity: 1; }
+    .mobile-intro-overlay .intro-exit:hover { opacity: 1; color: var(--sage); }
+
     /* RESPONSIVE */
     @media (max-width: 820px) {
       html { scroll-snap-type: y mandatory; }
@@ -267,6 +278,19 @@
     </div>
   </div>
   <a href="#" class="intro-exit" id="introExit">Enter site &rarr;</a>
+</div>
+
+<div class="mobile-intro-overlay" id="mobile-intro">
+  <div class="intro-header">
+    <span class="intro-eyebrow">LARDER: MISE EN GO</span>
+    <div class="intro-title">Larder</div>
+  </div>
+  <div class="pantry-grid">
+    <div class="pantry-col" id="mobilePantryColLeft"></div>
+    <div class="pantry-col-divider"></div>
+    <div class="pantry-col" id="mobilePantryColRight"></div>
+  </div>
+  <a href="#" class="intro-exit" id="mobileIntroExit">Enter site &rarr;</a>
 </div>
 
 <nav>
@@ -607,6 +631,120 @@
       introEl.style.display = 'none';
       document.body.style.overflow = '';
     }, 520);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  const mobileIntroEl = document.getElementById('mobile-intro');
+  const SKIP = window.innerWidth >= 900 || sessionStorage.getItem('misegoIntroPlayed');
+  if (SKIP) { mobileIntroEl.remove(); return; }
+  sessionStorage.setItem('misegoIntroPlayed', '1');
+  document.body.style.overflow = 'hidden';
+
+  const NEXT_LEVEL = { full: 'good', good: 'low', low: 'out', out: 'full' };
+  const SOLID_COUNT = { full: 3, good: 2, low: 1, out: 0 };
+
+  const LEFT_CATEGORIES = [
+    { label: 'Cereal Pasta & Grains', items: [
+      { name: 'Bulgur Wheat', level: 'full' },
+      { name: 'Carnaroli Rice', level: 'full' },
+      { name: 'Couscous', level: 'full' },
+      { name: 'Farro', level: 'full' },
+      { name: 'Jasmine Rice', level: 'full' },
+      { name: 'Pasta', level: 'full' },
+      { name: 'Polenta', level: 'full' },
+      { name: 'Rice Noodles', level: 'full' },
+      { name: 'Sushi Rice', level: 'full' },
+    ]},
+    { label: 'Cooking Sauces/Pastes', items: [
+      { name: 'Balsamic Vinegar', level: 'full' },
+      { name: 'Brown Rice Vinegar', level: 'full' },
+      { name: 'Fish Sauce', level: 'full' },
+    ]},
+  ];
+
+  const RIGHT_CATEGORIES = [
+    { label: 'Boxed/Canned Foods', items: [
+      { name: 'Anchovies', level: 'full' },
+      { name: 'Bonito Flakes', level: 'full' },
+      { name: 'Canned Cannellini Beans', level: 'full' },
+      { name: 'Canned Chickpeas', level: 'full' },
+      { name: 'Canned Kidney Beans', level: 'full' },
+      { name: 'Canned Tomato', level: 'full' },
+      { name: 'Coconut Milk', level: 'full' },
+      { name: 'Kombu', level: 'full' },
+      { name: 'Yaki-Nori', level: 'full' },
+    ]},
+    { label: 'Condiments', items: [
+      { name: 'Capers', level: 'full' },
+      { name: 'Ketchup', level: 'full' },
+      { name: 'Mayonnaise', level: 'full' },
+      { name: 'Olives', level: 'full' },
+      { name: 'Peperoncini', level: 'full' },
+      { name: 'Preserved Lemon', level: 'full' },
+      { name: 'Wasabi', level: 'full' },
+    ]},
+  ];
+
+  function buildDots(item) {
+    const wrap = document.createElement('div');
+    wrap.className = 'level-dots';
+    const solid = SOLID_COUNT[item.level];
+    for (let i = 0; i < 3; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'level-dot' + (i < solid ? ' filled' : '');
+      wrap.appendChild(dot);
+    }
+    return wrap;
+  }
+
+  function renderColumn(container, categories) {
+    categories.forEach((cat) => {
+      const block = document.createElement('div');
+      block.className = 'category-block';
+
+      const label = document.createElement('span');
+      label.className = 'category-label';
+      label.textContent = cat.label;
+      block.appendChild(label);
+
+      const rule = document.createElement('hr');
+      rule.className = 'category-rule';
+      block.appendChild(rule);
+
+      cat.items.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'item-row';
+
+        const nameEl = document.createElement('span');
+        nameEl.className = 'item-name';
+        nameEl.textContent = item.name;
+        row.appendChild(nameEl);
+        row.appendChild(buildDots(item));
+
+        row.addEventListener('click', () => {
+          item.level = NEXT_LEVEL[item.level];
+          const oldDots = row.querySelector('.level-dots');
+          row.replaceChild(buildDots(item), oldDots);
+        });
+
+        block.appendChild(row);
+      });
+
+      container.appendChild(block);
+    });
+  }
+
+  renderColumn(document.getElementById('mobilePantryColLeft'), LEFT_CATEGORIES);
+  renderColumn(document.getElementById('mobilePantryColRight'), RIGHT_CATEGORIES);
+
+  document.getElementById('mobileIntroExit').addEventListener('click', (e) => {
+    e.preventDefault();
+    mobileIntroEl.style.display = 'none';
+    document.body.style.overflow = '';
+    document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
   });
 })();
 </script>
