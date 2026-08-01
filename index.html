@@ -61,6 +61,11 @@
 
     /* SCREENSHOTS */
     .hero-screens img, .step-screen img { width: auto; max-width: 420px; height: auto; }
+    .hero-scroll-indicator { display: none; }
+    @keyframes heroScrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
 
     /* RULE */
     .rule { border: none; border-top: 0.5px solid var(--rule); margin: 0 5vw; }
@@ -207,7 +212,25 @@
       .nav-cta { font-size: 0.6rem; padding: 0.45rem 0.75rem; letter-spacing: 0.08em; }
       .nav-legal { display: none; }
       .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 4vw; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-      section.hero { min-height: 100vh !important; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 2.5rem; }
+      section.hero { min-height: 100vh !important; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 2.5rem; position: relative; }
+      .hero-scroll-indicator {
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: 1.25rem;
+        transform: translateX(-50%);
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        margin: 0;
+        color: rgba(245,242,238,0.4);
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        animation: heroScrollBounce 2.2s ease-in-out infinite;
+        transition: opacity 0.3s ease;
+      }
+      .hero-scroll-indicator.is-hidden { opacity: 0; pointer-events: none; }
       .hero-copy h1 { font-size: clamp(1.5rem, 6vw, 1.9rem); line-height: 1.1; }
       .hero-copy .eyebrow { letter-spacing: 0.1em; font-size: 0.6rem; }
       .hero-screens { display: none; }
@@ -319,6 +342,7 @@
   <div class="hero-screens">
     <img src="images/screen-recipes-portrait.png" alt="Recipes screen showing what you can cook now">
   </div>
+  <button class="hero-scroll-indicator" id="heroScrollIndicator" aria-label="Scroll to how it works">↓</button>
 </section>
 
 <hr class="rule">
@@ -936,6 +960,21 @@
   }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
 
   dotSections.forEach(section => dotObserver.observe(section));
-</script>  
+
+  const heroScrollIndicator = document.getElementById('heroScrollIndicator');
+  if (heroScrollIndicator) {
+    heroScrollIndicator.addEventListener('click', () => {
+      document.getElementById('how').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        heroScrollIndicator.classList.toggle('is-hidden', !entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+
+    heroObserver.observe(document.getElementById('hero'));
+  }
+</script>
 </body>
 </html>
