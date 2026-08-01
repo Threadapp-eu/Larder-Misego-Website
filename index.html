@@ -285,6 +285,7 @@
     <span class="intro-eyebrow">LARDER: MISE EN GO</span>
     <div class="intro-title">Larder</div>
   </div>
+  <div class="intro-pills" id="mobilePills"></div>
   <div class="pantry-grid">
     <div class="pantry-col" id="mobilePantryColLeft"></div>
     <div class="pantry-col-divider"></div>
@@ -688,6 +689,22 @@
     ]},
   ];
 
+  const PILLS = [
+    { key: 'all', label: 'All' },
+    { key: 'low', label: 'Low' },
+    { key: 'out', label: 'Out' },
+    { key: 'consol', label: 'Consol' },
+  ];
+  let activeFilter = 'all';
+
+  function itemMatchesFilter(item) {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'low') return item.level === 'low';
+    if (activeFilter === 'out') return item.level === 'out';
+    if (activeFilter === 'consol') return item.level === 'low' || item.level === 'out';
+    return true;
+  }
+
   function buildDots(item) {
     const wrap = document.createElement('div');
     wrap.className = 'level-dots';
@@ -698,6 +715,17 @@
       wrap.appendChild(dot);
     }
     return wrap;
+  }
+
+  function refreshRow(row, item) {
+    const oldDots = row.querySelector('.level-dots');
+    row.replaceChild(buildDots(item), oldDots);
+    row.classList.toggle('hidden', !itemMatchesFilter(item));
+  }
+
+  function refreshCategoryVisibility(block, items) {
+    const anyVisible = items.some(itemMatchesFilter);
+    block.classList.toggle('hidden', !anyVisible);
   }
 
   function renderColumn(container, categories) {
@@ -726,19 +754,50 @@
 
         row.addEventListener('click', () => {
           item.level = NEXT_LEVEL[item.level];
-          const oldDots = row.querySelector('.level-dots');
-          row.replaceChild(buildDots(item), oldDots);
+          refreshRow(row, item);
+          refreshCategoryVisibility(block, cat.items);
         });
 
         block.appendChild(row);
       });
 
+      refreshCategoryVisibility(block, cat.items);
       container.appendChild(block);
+    });
+  }
+
+  function refreshEverything() {
+    const blocks = document.querySelectorAll('#mobile-intro .category-block');
+    const allCats = LEFT_CATEGORIES.concat(RIGHT_CATEGORIES);
+    blocks.forEach((block, catIdx) => {
+      const cat = allCats[catIdx];
+      const rows = block.querySelectorAll('.item-row');
+      rows.forEach((row, itemIdx) => {
+        refreshRow(row, cat.items[itemIdx]);
+      });
+      refreshCategoryVisibility(block, cat.items);
+    });
+  }
+
+  function renderPills() {
+    const container = document.getElementById('mobilePills');
+    PILLS.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'intro-pill' + (p.key === activeFilter ? ' active' : '');
+      btn.textContent = p.label;
+      btn.addEventListener('click', () => {
+        activeFilter = p.key;
+        container.querySelectorAll('.intro-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        refreshEverything();
+      });
+      container.appendChild(btn);
     });
   }
 
   renderColumn(document.getElementById('mobilePantryColLeft'), LEFT_CATEGORIES);
   renderColumn(document.getElementById('mobilePantryColRight'), RIGHT_CATEGORIES);
+  renderPills();
 
   document.getElementById('mobileIntroExit').addEventListener('click', (e) => {
     e.preventDefault();
