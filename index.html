@@ -59,6 +59,9 @@
 
     /* RULE */
     .rule { border: none; border-top: 0.5px solid var(--rule); margin: 0 5vw; }
+    @media (min-width: 821px) {
+      #pricing-rule { display: none; }
+    }
 
     /* STEPS */
     .steps-section { display: grid; grid-template-columns: 3fr 2fr; align-items: start; padding: 3.75rem 5vw 6rem; max-width: 1400px; gap: 4rem; }
@@ -369,7 +372,7 @@
   <img class="screenshot-single" src="images/screen-larder-portrait.png" alt="Larder app screen">
 </section>
 
-<hr class="rule">
+<hr class="rule" id="pricing-rule">
 
 <!-- PRICING -->
 <section class="pricing" id="download">
