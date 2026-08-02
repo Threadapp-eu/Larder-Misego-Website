@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Larder · Mise en Go</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1A1A1A; --bg2: #1E1E1C; --text: #F5F2EE; --text-muted: rgba(245,242,238,0.55);
+      --text-dim: rgba(245,242,238,0.3); --text-faint: rgba(245,242,238,0.2);
+      --rule: rgba(245,242,238,0.08); --rule-mid: rgba(245,242,238,0.12);
+      --serif: 'DM Serif Display', serif; --sans: 'DM Sans', sans-serif;
+      --sage: #8FA67A;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 5vw; border-bottom: 0.5px solid var(--rule); }
+    .logo { font-family: var(--serif); font-size: 1.4rem; color: var(--text); text-decoration: none; letter-spacing: 0.02em; -webkit-text-stroke: 0.4px currentColor; }
+    .logo-sub { color: #8FA67A; }
+    .nav-back { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; font-family: var(--sans); }
+    .nav-back:hover { color: var(--text-muted); }
+    .content { max-width: 680px; margin: 0 auto; padding: 24px 24px 6rem; }
+    .eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+    h1 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .intro-text { font-size: 0.92rem; line-height: 1.8; color: var(--text-muted); max-width: 48ch; margin: 1rem 0 3rem; }
+
+    .contact-form { max-width: 480px; }
+    .form-field { margin-bottom: 1.6rem; }
+    .form-label { display: block; font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F2EE; margin-bottom: 0.6rem; }
+    .form-input, .form-textarea { width: 100%; background: var(--bg2); border: 1px solid var(--rule-mid); border-radius: 3px; padding: 0.75rem 0.9rem; color: var(--text); font-family: var(--sans); font-size: 0.9rem; font-weight: 300; outline: none; transition: border-color 0.2s; }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); }
+    .form-input:focus, .form-textarea:focus { border-color: rgba(245,242,238,0.35); }
+    .form-textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+    .footer-link-accent { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8FA67A; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; background: none; border: none; cursor: pointer; }
+    .footer-link-accent:hover { background: rgba(245,242,238,0.15); color: #8FA67A; }
+    button.footer-link-accent { margin-top: 0.4rem; }
+
+    .form-confirm { display: none; font-family: var(--serif); font-size: 1.3rem; color: var(--sage); padding: 2rem 0; }
+    .form-confirm.visible { display: block; }
+    .contact-form.hidden { display: none; }
+
+    footer { padding: 2rem 2.5rem; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-brand { font-family: var(--serif); font-size: 0.85rem; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .footer-link { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F2EE; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; }
+    .footer-link:hover { background: rgba(245,242,238,0.15); color: #F5F2EE; }
+    @media (max-width: 600px) { nav, .content, footer { padding-left: 1.5rem; padding-right: 1.5rem; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">Larder<span class="logo-sub"> &middot; Mise en Go</span></a>
+    <a href="/" class="nav-back">&larr; Back</a>
+  </nav>
+
+  <div class="content">
+    <div class="eyebrow">Get in touch</div>
+    <h1>Contact</h1>
+    <p class="intro-text">Questions, feedback, or trouble with the app - send a message and we'll get back to you.</p>
+
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xlgqqrea" method="POST">
+      <div class="form-field">
+        <label class="form-label" for="email">[Email]</label>
+        <input class="form-input" type="email" id="email" name="email" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="message">[Message]</label>
+        <textarea class="form-textarea" id="message" name="message" required></textarea>
+      </div>
+      <input type="hidden" name="_next" value="https://misego.app/contact.html?thanks">
+      <button type="submit" class="footer-link-accent">[Send]</button>
+    </form>
+
+    <div class="form-confirm" id="formConfirm">Message sent.</div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">Larder &middot; Mise en Go &middot; NL</div>
+    <div class="footer-links">
+      <a href="privacy.html" class="footer-link">[Privacy Policy]</a>
+      <a href="terms.html" class="footer-link">[Terms of Service]</a>
+      <a href="contact.html" class="footer-link">[Contact]</a>
+    </div>
+  </footer>
+
+  <script>
+    if (new URLSearchParams(window.location.search).has('thanks')) {
+      document.getElementById('contactForm').classList.add('hidden');
+      document.getElementById('formConfirm').classList.add('visible');
+    }
+  </script>
+
+</body>
+</html>
