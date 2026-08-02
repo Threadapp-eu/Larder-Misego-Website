@@ -98,7 +98,8 @@
     .price-amount { font-family: var(--serif); font-size: 3rem; font-weight: 400; margin-bottom: 0.3rem; display: flex; align-items: baseline; gap: 0.7rem; }
     .price-was { font-family: var(--sans); font-size: 1.1rem; color: var(--dim); text-decoration: line-through; }
     .price-founding { font-size: 0.78rem; color: var(--sage); margin-bottom: 0.6rem; }
-    .price-note { font-size: 0.72rem; letter-spacing: normal; color: var(--dim); margin-bottom: 2rem; }
+    .price-note { font-size: 0.72rem; letter-spacing: normal; color: var(--dim); }
+    .price-note + .price-note { margin-bottom: 2rem; }
     .price-features { list-style: none; margin-bottom: 2rem; }
     .price-features li { font-size: 0.88rem; color: var(--muted); padding: 0.6rem 0; border-bottom: 0.5px solid var(--rule); line-height: 1.5; }
     .price-features li:last-child { border-bottom: none; }
@@ -255,7 +256,7 @@
       .hero-copy h1 { font-size: clamp(1.5rem, 6vw, 1.9rem); }
     }
     .ios-waitlist { margin-top: 2rem; padding-top: 1.5rem; border-top: 0.5px solid var(--rule); }
-.ios-waitlist-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.9rem; display: block; }
+.ios-waitlist-label { font-family: var(--serif); font-size: 0.95rem; color: var(--text); margin-bottom: 0.9rem; display: block; }
 .ios-waitlist-form { display: flex; gap: 0.5rem; }
 .ios-waitlist-input { flex: 1; background: transparent; border: 1px solid var(--faint); border-radius: 5px; padding: 0.7rem 1rem; color: var(--text); font-family: var(--sans); font-size: 0.82rem; font-weight: 300; outline: none; transition: border-color 0.2s; min-width: 0; }
 .ios-waitlist-input::placeholder { color: var(--dim); }
