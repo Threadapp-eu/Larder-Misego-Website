@@ -50,7 +50,8 @@
     .hero-screens { display: flex; justify-content: center; width: 100%; transform: translateY(-38px); }
 
     /* SCREENSHOTS */
-    .hero-screens img, .step-screen img { width: auto; max-width: 420px; height: auto; }
+    .hero-screens img { width: auto; max-width: 420px; height: auto; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 15%, #000 80%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 15%, #000 80%, transparent 100%); }
+    .step-screen img { width: auto; max-width: 420px; height: auto; }
     .hero-scroll-indicator { display: none; }
     @keyframes heroScrollBounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
@@ -321,7 +322,7 @@
     <a href="#download" class="btn">Download on Google Play</a>
   </div>
   <div class="hero-screens">
-    <img src="images/screen-recipes-portrait.png" alt="Recipes screen showing what you can cook now">
+    <img src="images/screen-pantry-hero.jpg" alt="Pantry screen showing ingredient levels">
   </div>
   <button class="hero-scroll-indicator" id="heroScrollIndicator" aria-label="Scroll to how it works">↓</button>
 </section>
