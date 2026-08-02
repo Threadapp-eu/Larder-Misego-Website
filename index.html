@@ -37,16 +37,6 @@
     nav { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 5vw; border-bottom: 0.5px solid var(--rule); position: sticky; top: 0; background: var(--bg); z-index: 100; }
     .logo { font-family: var(--serif); font-size: 1.4rem; color: var(--text); text-decoration: none; letter-spacing: 0.02em; -webkit-text-stroke: 0.4px currentColor; }
     .logo-sub { color: var(--sage); }
-    .nav-cta { font-size: 0.78rem; font-family: var(--sans); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); text-decoration: none; border: 1px solid var(--text); border-radius: 5px; padding: 0.55rem 1.2rem; transition: background 0.2s, color 0.2s; }
-    .nav-cta:hover { background: var(--text); color: #1A1A1A; }
-    .nav-right { display: flex; align-items: center; gap: 1.8rem; }
-    .nav-legal { position: relative; }
-    .nav-legal-trigger { font-family: var(--serif); font-size: 0.95rem; font-weight: 400; color: var(--text); cursor: default; user-select: none; }
-    .nav-legal:hover .nav-legal-trigger { color: var(--muted); }
-    .nav-legal-menu { position: absolute; top: 100%; right: 0; margin-top: 0.9rem; background: var(--bg2); border: 0.5px solid var(--rule); border-radius: var(--radius); padding: 0.4rem; min-width: 150px; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.15s, transform 0.15s, visibility 0.15s; }
-    .nav-legal:hover .nav-legal-menu, .nav-legal:focus-within .nav-legal-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-    .nav-legal-menu a { display: block; font-family: var(--serif); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--dim); text-decoration: none; padding: 0.55rem 0.7rem; border-radius: calc(var(--radius) - 8px); transition: color 0.2s, background 0.2s; }
-    .nav-legal-menu a:hover { color: var(--text); background: rgba(245,242,238,0.06); }
 
     /* HERO */
     .hero { padding: 2rem 5vw; display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; max-width: 1400px; }
@@ -55,8 +45,8 @@
     .hero-copy p { font-size: 1rem; line-height: 1.8; color: var(--muted); max-width: 44ch; margin-bottom: 2.2rem; }
     .hero-body-mobile { display: none; }
     .eyebrow { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
-    .btn { display: inline-block; border: 1px solid var(--text); border-radius: 5px; color: var(--text); font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; transition: background 0.2s, color 0.2s; }
-    .btn:hover { background: var(--text); color: #1A1A1A; }
+    .btn { display: inline-block; background: #8FA67A; border: none; border-radius: 5px; color: #1A1A1A; font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .btn:hover { background: #7d9469; color: #1A1A1A; }
     .hero-screens { display: flex; justify-content: center; width: 100%; transform: translateY(-38px); }
 
     /* SCREENSHOTS */
@@ -99,7 +89,7 @@
     .steps-accordion-mobile { display: none; }
 
     /* PRICING */
-    .pricing { padding: 5rem 5vw 40vh; display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; max-width: 1400px; scroll-margin-top: 60px; }
+    .pricing { padding: 5rem 5vw 8rem; display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; max-width: 1400px; scroll-margin-top: 60px; }
     .pricing-copy { text-align: left; }
     .pricing-copy .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; display: block; }
     .pricing-copy h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; margin-bottom: 1rem; line-height: 1.15; }
@@ -117,9 +107,9 @@
     footer { padding: 2rem 5vw; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
     .footer-brand { font-family: var(--serif); font-size: 0.85rem; color: var(--dim); }
     .footer-copy { font-size: 0.65rem; color: var(--faint); margin-top: 0.3rem; }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .footer-link { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); text-decoration: none; transition: color 0.2s; }
-    .footer-link:hover { color: var(--muted); }
+    .footer-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .footer-link { font-family: var(--sans); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #F5F2EE; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; }
+    .footer-link:hover { background: rgba(245,242,238,0.15); color: #F5F2EE; }
 
     /* DOT NAV */
     .dot-nav { position: fixed; right: 1.8rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 1rem; z-index: 90; }
@@ -209,8 +199,6 @@
       #hero, #how, #screenshots, #download { scroll-snap-align: start; }
       nav { padding: 0.9rem 4vw; }
       .logo { font-size: 1.1rem; }
-      .nav-cta { font-size: 0.6rem; padding: 0.45rem 0.75rem; letter-spacing: 0.08em; }
-      .nav-legal { display: none; }
       .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 4vw; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
       section.hero { min-height: 100vh !important; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 15vh; position: relative; }
       .hero-scroll-indicator {
@@ -272,8 +260,8 @@
 .ios-waitlist-input { flex: 1; background: transparent; border: 1px solid var(--faint); border-radius: 5px; padding: 0.7rem 1rem; color: var(--text); font-family: var(--sans); font-size: 0.82rem; font-weight: 300; outline: none; transition: border-color 0.2s; min-width: 0; }
 .ios-waitlist-input::placeholder { color: var(--dim); }
 .ios-waitlist-input:focus { border-color: rgba(245,242,238,0.35); }
-.ios-waitlist-btn { display: inline-block; background: transparent; border: 1px solid var(--text); border-radius: 5px; color: var(--text); font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2rem; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
-.ios-waitlist-btn:hover { background: var(--text); color: #1A1A1A; }
+.ios-waitlist-btn { display: inline-block; background: #8FA67A; border: none; border-radius: 5px; color: #1A1A1A; font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2rem; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+.ios-waitlist-btn:hover { background: #7d9469; color: #1A1A1A; }
 .ios-waitlist-btn:disabled { opacity: 0.5; cursor: default; }
 @media (max-width: 820px) {
   .ios-waitlist-btn { display: block; width: 100%; font-size: 0.65rem; padding: 0.75rem 1.25rem; text-align: center; }
@@ -318,16 +306,6 @@
 
 <nav>
   <a href="/" class="logo">Larder<span class="logo-sub"> &middot; Mise en Go</span></a>
-  <div class="nav-right">
-    <div class="nav-legal" tabindex="0">
-      <span class="nav-legal-trigger">Legal</span>
-      <div class="nav-legal-menu">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-      </div>
-    </div>
-    <a href="#download" class="nav-cta">Get the app</a>
-  </div>
 </nav>
 
 <!-- HERO -->
@@ -421,10 +399,9 @@
       <div class="footer-copy">&copy; 2026 Nuttig &middot; misego.app &middot; NL &middot; KVK: 42128344</div>
   </div>
   <div class="footer-links">
-    <a href="privacy.html" class="footer-link">Privacy Policy</a>
-    <a href="terms.html" class="footer-link">Terms of Service</a>
-    <a href="mailto:hello@misego.app" class="footer-link">Contact</a>
-    <a href="#" class="footer-link">Google Play</a>
+    <a href="privacy.html" class="footer-link">[Privacy Policy]</a>
+    <a href="terms.html" class="footer-link">[Terms of Service]</a>
+    <a href="mailto:hello@misego.app" class="footer-link">[Contact]</a>
   </div>
 </footer>
 
