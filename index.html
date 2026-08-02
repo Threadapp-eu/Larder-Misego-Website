@@ -115,6 +115,8 @@
     .footer-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .footer-link { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F2EE; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; }
     .footer-link:hover { background: rgba(245,242,238,0.15); color: #F5F2EE; }
+    .footer-link-accent { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8FA67A; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; }
+    .footer-link-accent:hover { background: rgba(245,242,238,0.15); color: #8FA67A; }
 
     /* DOT NAV */
     .dot-nav { position: fixed; right: 1.8rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 1rem; z-index: 90; }
@@ -265,12 +267,6 @@
 .ios-waitlist-input { flex: 1; background: transparent; border: 1px solid var(--faint); border-radius: 5px; padding: 0.7rem 1rem; color: var(--text); font-family: var(--sans); font-size: 0.82rem; font-weight: 300; outline: none; transition: border-color 0.2s; min-width: 0; }
 .ios-waitlist-input::placeholder { color: var(--dim); }
 .ios-waitlist-input:focus { border-color: rgba(245,242,238,0.35); }
-.ios-waitlist-btn { display: inline-block; background: #8FA67A; border: none; border-radius: 5px; color: #1A1A1A; font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; padding: 0.6rem 2rem; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
-.ios-waitlist-btn:hover { background: #7d9469; color: #1A1A1A; }
-.ios-waitlist-btn:disabled { opacity: 0.5; cursor: default; }
-@media (max-width: 820px) {
-  .ios-waitlist-btn { display: block; width: 100%; font-size: 0.65rem; padding: 0.5rem 1.25rem; text-align: center; }
-}
 .ios-waitlist-msg { font-size: 0.8rem; margin-top: 0.7rem; min-height: 1.2em; }
 .ios-waitlist-msg.success { color: var(--sage); }
 .ios-waitlist-msg.error { color: #c47a5a; }
@@ -388,10 +384,10 @@
     <div class="price-founding">One-time purchase &middot; Own it forever</div>
     <div class="price-note">*Founding Cohort: Limited to the first 100 users</div>
     <div class="price-note">Price excludes applicable VAT or sales tax.</div>
-    <a href="#" class="btn">Get Larder on Google Play</a>
+    <a href="#" class="footer-link-accent">[GET LARDER ON GOOGLE PLAY]</a>
   <div class="ios-waitlist">
   <span class="ios-waitlist-label">Coming soon to iOS</span>
-  <a href="https://b2036c2a.sibforms.com/serve/MUIFAAZGNAZH7y9kf4z6ITw4aQA4eeWixPbkmfU5cLHdXVEZ0xYWzvRSLfbstobHZqncYJ_q-yQlwyCJoxKFO0EAFxKfUn8wiTwEUZZrMdmj3Xl8Adm1TdHOYIi3FLWVVd1ZA7cvtktV7dJ1oNQ1T2R-TkReEZbVVFj9eaT5zXa0xtAuq7o3IRDSQD1m-ad-zS0ITOkQgCrmjaUgPw==" target="_blank" rel="noopener" class="ios-waitlist-btn" style="text-decoration:none;margin-top:0.2rem;">Notify me when it launches</a>
+  <a href="https://b2036c2a.sibforms.com/serve/MUIFAAZGNAZH7y9kf4z6ITw4aQA4eeWixPbkmfU5cLHdXVEZ0xYWzvRSLfbstobHZqncYJ_q-yQlwyCJoxKFO0EAFxKfUn8wiTwEUZZrMdmj3Xl8Adm1TdHOYIi3FLWVVd1ZA7cvtktV7dJ1oNQ1T2R-TkReEZbVVFj9eaT5zXa0xtAuq7o3IRDSQD1m-ad-zS0ITOkQgCrmjaUgPw==" target="_blank" rel="noopener" class="footer-link-accent">[NOTIFY ME WHEN IT LAUNCHES]</a>
 </div>  
   </div>
 </section>
