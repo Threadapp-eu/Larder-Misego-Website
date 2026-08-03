@@ -43,12 +43,17 @@
     .form-confirm.visible { display: block; }
     .contact-form.hidden { display: none; }
 
-    footer { padding: 2rem 2.5rem; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .footer-brand { font-family: var(--serif); font-size: 0.85rem; color: var(--text-dim); }
+    footer { padding: 2rem 5vw; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-brand { font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--text); }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text); margin-top: 0.3rem; }
     .footer-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .footer-link { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F2EE; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; }
     .footer-link:hover { background: rgba(245,242,238,0.15); color: #F5F2EE; }
-    @media (max-width: 600px) { nav, .content, footer { padding-left: 1.5rem; padding-right: 1.5rem; } }
+    @media (max-width: 600px) { nav, .content { padding-left: 1.5rem; padding-right: 1.5rem; } }
+    .data-deletion { margin-top: 3rem; padding-top: 2rem; border-top: 0.5px solid var(--rule); max-width: 480px; }
+    .data-deletion h2 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.75rem; }
+    .data-deletion p { font-size: 0.92rem; line-height: 1.8; color: var(--text-muted); }
+    .data-deletion a { color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -77,10 +82,18 @@
     </form>
 
     <div class="form-confirm" id="formConfirm">Message sent.</div>
+
+    <div class="data-deletion">
+      <h2>Data Deletion Requests</h2>
+      <p>To request deletion of your anonymous device identifier held by Nuttig for Larder &middot; Mise en Go, email <a href="mailto:hello@misego.app">hello@misego.app</a> with the subject &ldquo;Data Deletion Request&rdquo;. We will delete your identifier from our servers within 30 days. Please note: deletion is permanent and cannot be undone. Your import allowance will be reset to zero and cannot be restored. You will need to purchase the app again to use the import feature.</p>
+    </div>
   </div>
 
   <footer>
-    <div class="footer-brand">Larder &middot; Mise en Go &middot; NL</div>
+    <div>
+      <div class="footer-brand">LARDER &middot; MISE EN GO</div>
+      <div class="footer-copy">&copy; 2026 NUTTIG &middot; MISEGO.APP &middot; KVK: 42128344</div>
+    </div>
     <div class="footer-links">
       <a href="privacy.html" class="footer-link">[Privacy Policy]</a>
       <a href="terms.html" class="footer-link">[Terms of Service]</a>
