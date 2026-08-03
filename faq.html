@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - Larder · Mise en Go</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;1,300;1,400&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1A1A1A; --text: #F5F2EE; --text-muted: rgba(245,242,238,0.55);
+      --text-dim: rgba(245,242,238,0.3); --text-faint: rgba(245,242,238,0.2);
+      --rule: rgba(245,242,238,0.08); --rule-mid: rgba(245,242,238,0.12);
+      --serif: 'DM Serif Display', serif; --sans: 'DM Sans', sans-serif;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 5vw; border-bottom: 0.5px solid var(--rule); }
+    .logo { font-family: var(--serif); font-size: 1.4rem; color: var(--text); text-decoration: none; letter-spacing: 0.02em; -webkit-text-stroke: 0.4px currentColor; }
+    .logo-sub { color: #8FA67A; }
+    .nav-back { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; font-family: var(--sans); }
+    .nav-back:hover { color: var(--text-muted); }
+    .content { max-width: 680px; margin: 0 auto; padding: 24px 24px 6rem; }
+    .eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+    h1 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 0.5rem; }
+    p { font-size: 0.92rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1rem; }
+    a { color: var(--text-muted); }
+    code { font-family: 'Space Mono', monospace; font-size: 0.85em; }
+
+    .faq-intro { text-align: center; margin: 2.5rem auto 3.5rem; }
+    .faq-intro-image { max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 1.75rem; }
+    .faq-intro-caption { font-family: var(--sans); font-style: italic; font-weight: 300; color: var(--text); font-size: 0.95rem; line-height: 1.8; max-width: 58ch; margin: 0 auto; }
+
+    .faq-item { padding: 1.75rem 0; border-bottom: 0.5px solid var(--rule); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F2EE; margin-bottom: 0.75rem; }
+    .faq-answer { font-size: 0.92rem; line-height: 1.8; color: var(--text); margin: 0; }
+    .faq-answer a { color: var(--text); }
+
+    footer { padding: 2rem 5vw; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-brand { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text); }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text); margin-top: 0.3rem; }
+    .footer-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .footer-link { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F2EE; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; }
+    .footer-link:hover { background: rgba(245,242,238,0.15); color: #F5F2EE; }
+    @media (max-width: 600px) { nav, .content { padding-left: 1.5rem; padding-right: 1.5rem; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">Larder<span class="logo-sub"> &middot; Mise en Go</span></a>
+    <a href="/" class="nav-back">&larr; Back</a>
+  </nav>
+
+  <div class="content">
+    <div class="eyebrow">Help</div>
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq-intro">
+      <img src="images/Victorian-household-goods-indicator.png" alt="A Victorian household wants indicator board with sliders for kitchen staples" class="faq-intro-image">
+      <p class="faq-intro-caption">The Victorian household wants indicator &mdash; a board mounted in the kitchen, one slider per staple, flipped when something ran low &mdash; is the oldest version of this idea. Before heading to the market, the person doing the shopping simply read off the marked items. Larder is that. For a kitchen that cooks across a dozen cuisines, on a phone - and your curated recipe vault that helps you decide what to replenish</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[HOW DO I IMPORT A RECIPE?]</div>
+      <p class="faq-answer">Tap + on the Recipes tab and paste a recipe URL. Larder works best with clean URLs that point directly to the recipe &mdash; for example <code>https://www.seriouseats.com/cantonese-style-braised-brisket-recipe-11700215</code>. Avoid URLs copied from social share buttons, which look like <code>facebook.com/sharer/sharer.php?u=https%3A%2F%2F...</code> &mdash; these won&rsquo;t work. If you&rsquo;re unsure, open the recipe in your browser and copy the URL from the address bar directly. If the site blocks scraping, tap &ldquo;Import from text&rdquo; and paste the recipe text instead.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[CAN I IMPORT FROM PAPRIKA, INSTAGRAM, YOUTUBE OR OTHER APPS?]</div>
+      <p class="faq-answer">No. Larder imports from original recipe URLs only. Paprika exports, Instagram posts, and YouTube videos don&rsquo;t contain structured recipe text Larder can work with. If you want to bring in a recipe from another source, copy the text and use the text import fallback &mdash; though we&rsquo;d recommend linking to the original site where possible.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[CAN I EDIT OR DELETE A RECIPE AFTER IMPORTING?]</div>
+      <p class="faq-answer">Yes. Long press on any ingredient or step to edit it. To delete a recipe, long press the recipe card in the Recipes tab.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[CAN I ADD OR REMOVE PANTRY ITEMS?]</div>
+      <p class="faq-answer">Yes. Tap + to add an item. Long press any item to remove it.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[WHY NO EXPIRY DATES, WEIGHTS, OR MEAL PLANNER?]</div>
+      <p class="faq-answer">The app store is full of kitchen apps that let you log weights, expiry dates, nutritional values, and elaborate meal plans. They&rsquo;re impressively thorough. They&rsquo;re also the apps you stop opening after two weeks because maintaining them became a second job you never signed up for. Larder simplifies the goal and asks one question: do you have this or not? Keep your stock levels roughly current and your Fresh This Week updated, and your Recipes tab tells you what you can cook tonight. That&rsquo;s the meal plan &mdash; without the overhead.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[DOES FRESH THIS WEEK CLEAR AUTOMATICALLY?]</div>
+      <p class="faq-answer">No. Fresh This Week is yours to manage &mdash; tick what you&rsquo;re planning to buy, uncheck when you&rsquo;ve used it up. Most people find it naturally resets with their weekly shop. It doesn&rsquo;t reset on a schedule.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[WHAT IF I REINSTALL THE APP OR GET A NEW PHONE?]</div>
+      <p class="faq-answer">Your purchase is tied to your Google account, so you can reinstall Larder on any Android device logged into the same account at no extra cost. Your pantry and recipes are stored locally though &mdash; back up to Google Drive in Settings before switching devices, then restore on the new one.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[DOES LARDER WORK WITHOUT INTERNET?]</div>
+      <p class="faq-answer">Your pantry and saved recipes are always available offline. Importing new recipes requires an internet connection &mdash; Larder sends the recipe text to <a href="https://anthropic.com/privacy" target="_blank" rel="noopener">Claude</a> to restructure it.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[WHAT HAPPENS WHEN I HIT 100 IMPORTS?]</div>
+      <p class="faq-answer">Drop us a line at <a href="mailto:hello@misego.app">hello@misego.app</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[WHY IS THERE A FOUNDING PRICE?]</div>
+      <p class="faq-answer">The founding price of $24.99 is for the first 100 cooks who use Larder seriously, cook across cuisines, and aren&rsquo;t afraid to tell us what&rsquo;s missing. Their feedback shapes what Larder becomes. After the first 100, the price moves to $49.99.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">[IS THE FOUNDING PRICE STILL AVAILABLE?]</div>
+      <p class="faq-answer">Check <a href="/">misego.app</a> for current pricing.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-brand">LARDER &middot; MISE EN GO</div>
+      <div class="footer-copy">&copy; 2026 NUTTIG &middot; MISEGO.APP &middot; KVK: 42128344</div>
+    </div>
+    <div class="footer-links">
+      <a href="privacy.html" class="footer-link">[Privacy Policy]</a>
+      <a href="terms.html" class="footer-link">[Terms of Service]</a>
+      <a href="contact.html" class="footer-link">[Contact]</a>
+      <a href="faq.html" class="footer-link">[FAQ]</a>
+    </div>
+  </footer>
+
+</body>
+</html>
