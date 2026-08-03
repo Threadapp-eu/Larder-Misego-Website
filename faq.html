@@ -39,7 +39,7 @@
     .faq-answer { font-size: 0.92rem; line-height: 1.8; color: var(--text); margin: 0; }
     .faq-answer a { color: var(--text); }
     @media (min-width: 768px) {
-      .faq-grid { grid-template-columns: 1fr 1fr; column-gap: 3rem; }
+      .faq-grid { grid-template-columns: 1fr 1fr; column-gap: 3rem; padding-left: 4rem; padding-right: 4rem; }
       .faq-item:nth-last-child(-n+2) { border-bottom: none; }
     }
 
@@ -49,7 +49,7 @@
     .footer-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .footer-link { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F2EE; text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 4px; transition: background 0.2s, color 0.2s; }
     .footer-link:hover { background: rgba(245,242,238,0.15); color: #F5F2EE; }
-    @media (max-width: 600px) { nav, .content, .faq-grid { padding-left: 1.5rem; padding-right: 1.5rem; } }
+    @media (max-width: 600px) { nav, .content { padding-left: 1.5rem; padding-right: 1.5rem; } }
   </style>
 </head>
 <body>
@@ -61,12 +61,6 @@
 
   <div class="content">
     <div class="eyebrow">Help</div>
-
-    <div class="faq-intro">
-      <img src="images/Victorian-household-goods-indicator.png" alt="A Victorian household wants indicator board with sliders for kitchen staples" class="faq-intro-image">
-      <p class="faq-intro-caption">The Victorian household wants indicator &mdash; a board mounted in the kitchen, one slider per staple, flipped when something ran low &mdash; is the oldest version of this idea. Before heading to the market, the person doing the shopping simply read off the marked items. Larder is that. For a kitchen that cooks across a dozen cuisines, on a phone - and your curated recipe vault that helps you decide what to replenish</p>
-    </div>
-
     <h1>Frequently Asked Questions</h1>
   </div>
 
@@ -124,6 +118,13 @@
     <div class="faq-item">
       <div class="faq-question">[IS THE FOUNDING PRICE STILL AVAILABLE?]</div>
       <p class="faq-answer">Check <a href="/">misego.app</a> for current pricing.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="faq-intro">
+      <img src="images/Victorian-household-goods-indicator.png" alt="A Victorian household wants indicator board with sliders for kitchen staples" class="faq-intro-image">
+      <p class="faq-intro-caption">The Victorian household wants indicator &mdash; a board mounted in the kitchen, one slider per staple, flipped when something ran low &mdash; is the oldest version of this idea. Before heading to the market, the person doing the shopping simply read off the marked items. Larder is that. For a kitchen that cooks across a dozen cuisines, on a phone - and your curated recipe vault that helps you decide what to replenish</p>
     </div>
   </div>
 
