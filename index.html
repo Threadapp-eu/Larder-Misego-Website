@@ -927,14 +927,24 @@
     });
   });
 
+  dotButtons[0].classList.add('active');
+
+  let activeDotIdx = 0;
+  const intersectingDots = new Set();
   const dotObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const idx = dotSections.indexOf(entry.target);
+      const idx = dotSections.indexOf(entry.target);
+      if (entry.isIntersecting) intersectingDots.add(idx);
+      else intersectingDots.delete(idx);
+    });
+    if (intersectingDots.size) {
+      const idx = Math.min(...intersectingDots);
+      if (idx !== activeDotIdx) {
+        activeDotIdx = idx;
         dotButtons.forEach(b => b.classList.remove('active'));
         dotButtons[idx].classList.add('active');
       }
-    });
+    }
   }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
 
   dotSections.forEach(section => dotObserver.observe(section));
