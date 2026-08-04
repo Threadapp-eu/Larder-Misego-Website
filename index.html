@@ -234,7 +234,8 @@
       .hero-copy .eyebrow { letter-spacing: 0.1em; font-size: 0.6rem; }
       .hero-screens { display: none; }
       .hero-body-desktop { display: none; }
-      .hero-body-mobile { display: inline; }
+      .hero-body-mobile { display: block; }
+      .hero-copy .hero-body-mobile { margin-bottom: 1rem; }
       .btn { font-size: 0.65rem; padding: 0.5rem 1.25rem; display: block; width: 100%; text-align: center; }
       .steps-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-start; grid-template-columns: 1fr; padding: 2rem 4vw; padding-top: 2.5rem; gap: 1.5rem; }
       .steps-copy { grid-column: 1; max-width: none; }
@@ -267,6 +268,7 @@
       .ios-line-mobile { display: block; font-size: 0.72rem; color: var(--dim); text-align: center; }
       .ios-notify-link-mobile { color: var(--sage); text-decoration: none; font-weight: 600; }
       .dot-nav { right: 0.5rem; display: none; }
+      .footer-brand, .footer-copy, .footer-link, .footer-link-accent { font-size: 0.68rem; }
     }
     @media (max-width: 500px) {
       nav { padding: 1rem 4vw; }
@@ -326,7 +328,9 @@
   <div class="hero-copy">
     <span class="eyebrow">Pantry Indicator &amp; Matched Recipe Vault &middot; Android</span>
     <h1>Mise en place - matched to what's actually in your kitchen.</h1>
-    <p><span class="hero-body-desktop">Import any recipe. Larder restructures it into mise en place - wet prep, dry prep, cook sequence - and shows you what you can cook tonight based on what's in your kitchen.</span><span class="hero-body-mobile">Import any recipe. Larder restructures it into mise en place - wet prep, dry prep, cook sequence - and shows you what you can cook tonight based on what's in your kitchen.</span></p>
+    <p><span class="hero-body-desktop">Import any recipe. Larder restructures it into mise en place - wet prep, dry prep, cook sequence - and shows you what you can cook tonight based on what's in your kitchen.</span></p>
+    <p class="hero-body-mobile hero-body-mobile-pasta">For cooks with a varied repertoire and a pantry full of ambition - who still somehow end up making pasta again.</p>
+    <p class="hero-body-mobile hero-body-mobile-import">Import any recipe. Larder restructures it into mise en place - wet prep, dry prep, cook sequence - and shows you what you can cook tonight based on what's in your kitchen.</p>
     <a href="#download" class="footer-link">[GET LARDER ON GOOGLE PLAY]</a>
   </div>
   <div class="hero-screens">
